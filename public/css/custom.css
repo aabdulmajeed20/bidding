@@ -1,0 +1,17 @@
+.full-button {
+    width: 100%;
+    height: 100%;
+}
+.extend-row {
+    margin-top: 10px;
+    height: 60px;
+}
+.invoice-top {
+  margin-top: 7px;
+  font-weight: bold;
+  size: 10px;
+}
+
+.create{
+    padding-left: 1000px;
+}

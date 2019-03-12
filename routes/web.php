@@ -14,3 +14,23 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/bidding', function () {
+    return view('bidding');
+});
+
+Route::get('/addBidding', function () {
+    return view('addBidding');
+});
+
+Route::get('/biddingHistory', function () {
+    return view('biddingHistory');
+});
+
+Route::get('/test', function () {
+    return view('test');
+});
+
+Route::get('/home', function () {
+    return view('home');
+});
