@@ -15,6 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::post('/login', [
+    'uses' => 'HomeController@login',
+    'as' => 'login'
+]);
+Route::get('/getLogin', [
+    'uses' => 'HomeController@getLogin',
+    'as' => 'getLogin'
+]);
+
 Route::get('/bidding', function () {
     return view('bidding');
 });
@@ -32,4 +41,7 @@ Route::get('/test', function () {
 });
 Route::get('/testApi', 'HomeController@testApi');
 
-Route::get('/home', 'HomeController@login');
+Route::get('/home', [
+    'uses' => 'HomeController@home',
+    'as' => 'home'
+]);
