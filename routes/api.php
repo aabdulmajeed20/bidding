@@ -21,3 +21,7 @@ Route::post('login', [
     'uses' => 'HomeController@login',
     'as' => 'api.login'
 ]);
+Route::get('login', [
+    'uses' => 'HomeController@getlogin',
+    'as' => 'api.getlogin'
+]);

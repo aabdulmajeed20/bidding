@@ -30,5 +30,6 @@ Route::get('/biddingHistory', function () {
 Route::get('/test', function () {
     return view('test');
 });
+Route::get('/testApi', 'HomeController@testApi');
 
 Route::get('/home', 'HomeController@login');
