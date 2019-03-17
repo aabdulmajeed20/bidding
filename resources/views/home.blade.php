@@ -22,7 +22,7 @@
                             <a href="" class="btn btn-success full-button"><h3>Open Bid</h3></a>
                         </div>
                         <div class="col-md-6">
-                            <a href="" class="btn btn-primary full-button"><h3>Show bidding History</h3></a>
+                            <a href="{{ route('biddingHistory') }}" class="btn btn-primary full-button"><h3>Show bidding History</h3></a>
                         </div>
                     </div>
                 </div>

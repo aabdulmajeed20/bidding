@@ -19,6 +19,7 @@ Route::post('/login', [
     'uses' => 'HomeController@login',
     'as' => 'login'
 ]);
+
 Route::get('/getLogin', [
     'uses' => 'HomeController@getLogin',
     'as' => 'getLogin'
@@ -32,16 +33,33 @@ Route::get('/addBidding', function () {
     return view('addBidding');
 });
 
-Route::get('/biddingHistory', function () {
-    return view('biddingHistory');
-});
+Route::get('/biddingHistory', [
+    'uses' => 'BidController@index',
+    'as' => 'biddingHistory'
+]);
 
 Route::get('/test', function () {
     return view('test');
 });
+
 Route::get('/testApi', 'HomeController@testApi');
 
 Route::get('/home', [
     'uses' => 'HomeController@home',
     'as' => 'home'
 ]);
+
+Route::post('/logout', [
+    'uses' => 'HomeController@logout',
+    'as' => 'logout'
+]);
+
+
+// for test 
+Route::get('/add', [
+    'uses' => 'BidController@create',
+    'as' => 'add'
+]);
+
+Route::post('add','BidController@store');
+
