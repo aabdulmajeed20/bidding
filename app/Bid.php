@@ -12,7 +12,7 @@ class Bid extends Eloquent
     protected $collection = 'bids';
 
     protected $fillable = [
-        'amount', 'status', 'provider_id',
+        'amount', 'status', 'provider_id','purchased_date', 'status'
     ];
 
     public function user() 

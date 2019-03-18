@@ -23,24 +23,27 @@
                 <th>Bidder Name </th> {{-- how did you buy from!?   --}}
                 <th>AWARDED BID</th>  {{-- how much did u take the bid?!    --}}
                 <th>TIME</th>  {{-- EX: 1 year ago   --}}
+                <th>Status</th>  {{-- EX: completed or incomleted   --}}
                 <th>Details</th>  {{-- EX: 1 year ago   --}}
               </tr>
             </thead>
-            <tbody>                
-              <tr>
-                <td>majeed ZG!</td>
-                <td>8</td>
-                <td>3mk Ahmed</td>
-                <td>30 CBX</td>
-                <td>1 year ago</td>
-              <td>
-                  <select id="selectbox" data-selected="">
+            <tbody>    
+              @foreach($bids as $bid)
+                <tr>
+                  <td>{{$bid->id}}</td>
+                  <td>{{($bid->provider_ids)->count()}}</td>
+                  <td>{{$bid->groupBy($bid->id)->avg(amount)}}</td>
+                  <td>{{$bid->created_at}}</td>
+                  <td>{{$bid->status}}</td>
+                  <td>
+                    <select id="selectbox" data-selected="">
                       <option value="" selected="selected" disabled="disabled">Select</option>
                       <option value="1">Repost</option>
                       <option value="2">Delete</option>
                     </select>
                   </td> 
-              </tr>
+                </tr>
+              @endforeach  
             </tbody>
           </table>
       </div>
@@ -58,13 +61,15 @@
                   </tr>
              </thead>
              <tbody>
+                @foreach($bids as $bid)
                  <tr>
-                     <td>Write the NAME</td>
-                     <td>3 people</td>
-                     <td>50 CBX</td>
-                     <td>2019/02/01</td>
-                     <td> <button class="btn btn-default"><a href=" ">Details</a></button></td>
+                     <td>{{$bid->id}}</td>
+                     <td>{{($bid->provider_ids)->count()}}</td>
+                     <td>{{$bid->groupBy($bid->id)->avg(amount)}}</td>
+                     <td>{{$bid->created_at}}</td>
+                     <td> <button class="btn btn-default"><a href="{{route('bidDetails', ['bid_id' => $bid->id])}}">Details</a></button></td>
                   </tr>
+                @endforeach  
               </tbody>
           </table>
     </div>
@@ -76,30 +81,32 @@
               <tr>
                 <th>PROJECT NAME</th>
                 <th>BIDS</th> {{-- how many bids are there?  --}}
-                <th>Bidder Name </th> {{-- how did you buy from!?   --}}
+                <th>Bidder Name </th> {{-- who did you buy from!?   --}}
                 <th>AWARDED BID</th>  {{-- how much did u take the bid?!    --}}
                 <th>TIME</th>  {{-- EX: 1 year ago   --}}
                 <th>Status</th>  {{-- EX: completed or incomleted   --}}
                 <th>ACTION</th>  
               </tr>
             </thead>
-            <tbody>                
-              <tr>
-                <td>majeed ZG!</td>
-                <td>8</td>
-                <td>3mk Ahmed</td>
-                <td>30 CBX</td>
-                <td>1 year ago</td>
-                <td>Completed</td>
-  
-              <td>
-                  <select id="selectbox" data-selected="">
-                      <option value="" selected="selected" disabled="disabled">Select</option>
-                      <option value="1">Repost</option>
-                      <option value="2">Delete</option>
-                    </select>
+            <tbody>   
+              @foreach($bids as $bid)
+                <tr>
+                  <td>{{$bid->id}}</td>
+                  <td>{{($bid->provider_ids)->count()}}</td>
+                  <td>{{$bid->first()->user()->first()->name}}</td> {{-- get the user name  --}}
+                  <td>{{$bid->max(amount)}}</td>
+                  <td>{{$bid->created_at}}</td>
+                  <td>{{$bid->status}}</td>
+    
+                  <td>
+                    <select id="selectbox" data-selected="">
+                        <option value="" selected="selected" disabled="disabled">Select</option>
+                        <option value="1">Repost</option>
+                        <option value="2">Delete</option>
+                      </select>
                   </td> 
               </tr>
+              @endforeach  
             </tbody>
           </table>
       </div>
