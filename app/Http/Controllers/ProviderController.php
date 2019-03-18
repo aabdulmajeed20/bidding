@@ -20,7 +20,7 @@ class ProviderController extends Controller
         $provider->password = bcrypt(request('password'));
         $provider->save();
 
-        return view('welcome');
+        return redirect()->route('allBidding');
     }
     public function login()
     {
@@ -29,7 +29,7 @@ class ProviderController extends Controller
     public function postLogin()
     {
         if(Auth::guard('provider')->attempt(['email' => request('email'), 'password' => request('password')])) {
-            return 'Success Provider Login';
+            return redirect()->route('allBidding');
         }
         return 'Failed Login';
     }

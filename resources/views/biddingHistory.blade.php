@@ -31,8 +31,8 @@
               @foreach($bids as $bid)
                 <tr>
                   <td>{{$bid->id}}</td>
-                  <td>{{($bid->provider_ids)->count()}}</td>
-                  <td>{{$bid->groupBy($bid->id)->avg(amount)}}</td>
+                  <td>provider name</td> {{-- {{($bid->provider_ids)->count()}} --}}
+                  <td>avg bid</td> {{-- {{$bid->groupBy($bid->id)->avg(amount)}} --}}
                   <td>{{$bid->created_at}}</td>
                   <td>{{$bid->status}}</td>
                   <td>
@@ -64,8 +64,8 @@
                 @foreach($bids as $bid)
                  <tr>
                      <td>{{$bid->id}}</td>
-                     <td>{{($bid->provider_ids)->count()}}</td>
-                     <td>{{$bid->groupBy($bid->id)->avg(amount)}}</td>
+                     <td>provider name</td> {{-- {{($bid->provider_ids)->count()}} --}}
+                     <td>avg bid</td> {{-- {{$bid->groupBy($bid->id)->avg(amount)}} --}}
                      <td>{{$bid->created_at}}</td>
                      <td> <button class="btn btn-default"><a href="{{route('bidDetails', ['bid_id' => $bid->id])}}">Details</a></button></td>
                   </tr>
@@ -92,9 +92,9 @@
               @foreach($bids as $bid)
                 <tr>
                   <td>{{$bid->id}}</td>
-                  <td>{{($bid->provider_ids)->count()}}</td>
+                  <td>provider name</td> {{-- {{($bid->provider_ids)->count()}} --}}
                   <td>{{$bid->first()->user()->first()->name}}</td> {{-- get the user name  --}}
-                  <td>{{$bid->max(amount)}}</td>
+                  <td>max bidding</td> {{-- {{$bid->max(amount)}} --}}
                   <td>{{$bid->created_at}}</td>
                   <td>{{$bid->status}}</td>
     

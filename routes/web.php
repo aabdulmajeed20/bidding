@@ -33,9 +33,9 @@ Route::get('/addBid', [
 ]);
 
 // will create the provider bidding
-Route::post('/createBid', [
-    'uses' => 'BidController@addBidding',
-    'as' => 'createBid'
+Route::post('/postBid', [
+    'uses' => 'BidController@postBid',
+    'as' => 'postBid'
 ]);
 
 Route::get('/biddingHistory', [
@@ -58,11 +58,6 @@ Route::get('/bidDetails/{bid_id}', [
     'as' => 'bidDetails'
 ]);
 
-// for test 
-Route::get('/add', [
-    'uses' => 'BidController@create',
-    'as' => 'add'
-]);
 
 Route::post('add','BidController@store');
 
@@ -83,6 +78,11 @@ Route::prefix('provider')->group(function() {
     Route::post('/postLogin', [
         'uses' => 'ProviderController@postLogin',
         'as' => 'provider.postLogin'
+    ]);
+
+    Route::get('/allBidding', [
+        'uses' => 'BidController@allBidding',
+        'as' => 'allBidding'
     ]);
     
 }); 
