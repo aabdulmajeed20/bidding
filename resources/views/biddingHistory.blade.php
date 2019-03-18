@@ -20,19 +20,28 @@
               <tr>
                 <th>PROJECT NAME</th>
                 <th>BIDS</th> {{-- how many bids are there?  --}}
-                <th>Bidder Name </th> {{-- how did you buy from!?   --}}
+                <th>Bidder Name </th> {{-- who did you buy from!?   --}}
                 <th>AWARDED BID</th>  {{-- how much did u take the bid?!    --}}
                 <th>TIME</th>  {{-- EX: 1 year ago   --}}
                 <th>Status</th>  {{-- EX: completed or incomleted   --}}
-                <th>Details</th>  {{-- EX: 1 year ago   --}}
+                <th>Details</th>  
               </tr>
             </thead>
             <tbody>    
               @foreach($bids as $bid)
                 <tr>
-                  <td>{{$bid->id}}</td>
-                  <td>provider name</td> {{-- {{($bid->provider_ids)->count()}} --}}
-                  <td>avg bid</td> {{-- {{$bid->groupBy($bid->id)->avg(amount)}} --}}
+                  <td>{{$bid->amount}}</td>
+                  @if (count((array)$bid->provider_ids) <= 0)
+                    <td>0</td> {{-- {{($bid->provider_ids)->count()}} --}}
+                  @else
+                    <td>{{($bid->provider_ids)->count()}}</td> {{-- {{($bid->provider_ids)->count()}} --}}
+                  @endif
+                  @if ($bid->groupBy($bid->id)->avg('amount') <= 0)
+                    <td>0</td> {{-- {{$bid->groupBy($bid->id)->avg(amount)}} --}}
+                  @else
+                    <td>{{$bid->groupBy($bid->id)->avg(amount)}}</td> {{-- {{$bid->groupBy($bid->id)->avg(amount)}} --}}
+                  @endif
+                  
                   <td>{{$bid->created_at}}</td>
                   <td>{{$bid->status}}</td>
                   <td>
@@ -42,6 +51,7 @@
                       <option value="2">Delete</option>
                     </select>
                   </td> 
+                  <td> <button class="btn btn-default"><a href="{{route('bidDetails', ['bid_id' => $bid->id])}}">Details</a></button></td>
                 </tr>
               @endforeach  
             </tbody>

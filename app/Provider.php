@@ -17,7 +17,7 @@ class Provider extends Authenticatable
     protected $guard = 'provider';
 
     protected $fillable = [
-        'name', 'email', 'picture',
+        'name', 'email', 
     ];
 
     /**
@@ -29,8 +29,8 @@ class Provider extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function bid()
+    public function offer()
     {
-        return $this->belongsToMany('App\Bid');
+        return $this->hasMany('App\Offer');
     }
 }
