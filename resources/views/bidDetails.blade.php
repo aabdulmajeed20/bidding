@@ -3,6 +3,7 @@
 
 
 <div class="container">
+<<<<<<< HEAD:resources/views/bidDetails.blade.php
     <div class="create" style="margin-bottom: 14px;">
         <button type="button" class="btn btn-success btn-lg">bid</button>
     </div>
@@ -11,6 +12,15 @@
       <div class="panel panel-default text-left">
         <div class="panel-body">
           <p contenteditable="false">Your Bidding: {{$bid->amount}}</p>
+=======
+
+  <div class="row">
+      <div class="col-sm-12">
+        <div class="panel panel-default text-left">
+          <div class="panel-body">
+          <p contenteditable="false">Your Bidding: {{$user->name}}</p>
+          </div>
+>>>>>>> cb8a26c962f2ae99e0a11bd6d034fb3e15ff63d0:resources/views/bidding.blade.php
         </div>
       </div>
     </div>
