@@ -8,7 +8,7 @@
       <div class="col-sm-12">
         <div class="panel panel-default text-left">
           <div class="panel-body">
-            <p contenteditable="false">Your Bidding: $100</p>
+          <p contenteditable="false">Your Bidding: {{$user->name}}</p>
           </div>
         </div>
       </div>

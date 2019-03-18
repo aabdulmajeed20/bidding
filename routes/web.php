@@ -15,19 +15,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/login', [
+Route::post('/postLogin', [
+    'uses' => 'HomeController@postLogin',
+    'as' => 'postLogin'
+]);
+
+Route::get('/login', [
     'uses' => 'HomeController@login',
     'as' => 'login'
 ]);
 
-Route::get('/getLogin', [
-    'uses' => 'HomeController@getLogin',
-    'as' => 'getLogin'
-]);
 
-Route::get('/bidding', function () {
-    return view('bidding');
-});
+Route::get('/bidding', [
+    'uses' => 'HomeController@getBidding',
+    'as' => 'bidding'
+]);
 
 Route::get('/addBidding', function () {
     return view('addBidding');
@@ -62,4 +64,25 @@ Route::get('/add', [
 ]);
 
 Route::post('add','BidController@store');
+
+Route::prefix('provider')->group(function() {
+    
+    Route::get('/register', [
+        'uses' => 'ProviderController@register',
+        'as' => 'register'
+    ]);
+    Route::post('/postRegister', [
+        'uses' => 'ProviderController@postRregister',
+        'as' => 'provider.postRegister'
+    ]);
+    Route::get('/login', [
+        'uses' => 'ProviderController@login',
+        'as' => 'provider.login'
+    ]);
+    Route::post('/postLogin', [
+        'uses' => 'ProviderController@postLogin',
+        'as' => 'provider.postLogin'
+    ]);
+    
+}); 
 
