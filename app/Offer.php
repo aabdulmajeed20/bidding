@@ -12,7 +12,7 @@ class Offer extends Eloquent
     protected $collection = 'offers';
 
     protected $fillable = [
-        'is_purchased', 
+        'is_purchased', 'price',
     ];
 
 

@@ -35,16 +35,11 @@ class BidController extends Controller
         return view('addBidding');
     }
 
-    public function addBidding(Request $request)
-    {
-        $user = Auth::Provider(); 
-        return "hello world";
-    }
-
     public function biddingHistory()
     {  
-        // $user = Auth::user(); 
-        $bids = Bid::where('user_id', '5c8e7f37dc09cf120079933d')->get();
+        $user_id = Session::get('user_id');        
+        $bids = Bid::where('user_id', $user_id)->get();
+        // $offer = Offer::where('bid_id', $bids->id)->get();
         return view('biddingHistory', ['bids' => $bids]);
     }
 
@@ -52,7 +47,5 @@ class BidController extends Controller
     {
         $data = Bid::where('status', 'open')->get();
         return view('allBidding', ['data' => $data]);
-
     }
-
 }
