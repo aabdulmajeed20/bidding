@@ -83,6 +83,10 @@ Route::prefix('provider')->group(function() {
         'uses' => 'ProviderController@postLogin',
         'as' => 'provider.postLogin'
     ]);
+    Route::get('home', [
+        'uses' => 'ProviderController@home',
+        'as' => 'provider.home'
+    ]);
     
 }); 
 

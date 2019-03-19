@@ -29,8 +29,15 @@ class ProviderController extends Controller
     public function postLogin()
     {
         if(Auth::guard('provider')->attempt(['email' => request('email'), 'password' => request('password')])) {
-            return 'Success Provider Login';
+            $provider_id = Auth::guard('provider')->id();
+            dd($provider_id);
+            session()->put("provider_id", $provider_id);
+            return redirect()->route('provider.home');
         }
         return 'Failed Login';
+    }
+    public function home()
+    {
+        return view('provider/home');
     }
 }
