@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="create">
-        <button type="button" class="btn btn-success btn-lg">Create bidding</button>
+        <button type="button" class="btn btn-success btn-lg" onclick="window.location.href='{{ route('addBid') }}'">Create bidding</button>
     </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -19,7 +19,7 @@
 
                     <div class="row">
                         <div class="col-md-4">
-                            <a href=" {{route('bidding')}} " class="btn btn-success full-button"><h3>Open Bid</h3></a>
+                            <a href="  " class="btn btn-success full-button"><h3>Open Bid</h3></a>
                         </div>
                         <div class="col-md-6">
                             <a href="{{ route('biddingHistory') }}" class="btn btn-primary full-button"><h3>Show bidding History</h3></a>

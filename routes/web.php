@@ -26,25 +26,22 @@ Route::get('/login', [
 ]);
 
 
-Route::get('/bidding', [
-    'uses' => 'HomeController@getBidding',
-    'as' => 'bidding'
+// the provider will bid
+Route::get('/addBid', [
+    'uses' => 'BidController@createBid',
+    'as' => 'addBid'
 ]);
 
-Route::get('/addBidding', function () {
-    return view('addBidding');
-});
+// will create the provider bidding
+Route::post('/postBid', [
+    'uses' => 'BidController@postBid',
+    'as' => 'postBid'
+]);
 
 Route::get('/biddingHistory', [
-    'uses' => 'BidController@index',
+    'uses' => 'BidController@biddingHistory',
     'as' => 'biddingHistory'
 ]);
-
-Route::get('/test', function () {
-    return view('test');
-});
-
-Route::get('/testApi', 'HomeController@testApi');
 
 Route::get('/home', [
     'uses' => 'HomeController@home',
@@ -56,12 +53,15 @@ Route::post('/logout', [
     'as' => 'logout'
 ]);
 
-
-// for test 
-Route::get('/add', [
-    'uses' => 'BidController@create',
-    'as' => 'add'
+Route::get('/bidDetails/{bid_id}', [
+    'uses' => 'BidController@bidDetails',
+    'as' => 'bidDetails'
 ]);
+Route::get('/allBidding', [
+    'uses' => 'BidController@allBidding',
+    'as' => 'allBidding'
+]);
+
 
 Route::post('add','BidController@store');
 

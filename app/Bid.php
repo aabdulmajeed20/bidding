@@ -12,7 +12,7 @@ class Bid extends Eloquent
     protected $collection = 'bids';
 
     protected $fillable = [
-        'amount', 'status', 'provider_id',
+        'amount', 'status','purchased_date', 'status'
     ];
 
     public function user() 
@@ -20,8 +20,8 @@ class Bid extends Eloquent
         return $this->belongsTo('App\User');
     }
 
-    public function provider()
+    public function offer()
     {
-        return $this->belongsToMany('App\Provider');
+        return $this->hasMany('App\Offer');
     }
 }

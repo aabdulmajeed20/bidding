@@ -20,7 +20,7 @@ class ProviderController extends Controller
         $provider->password = bcrypt(request('password'));
         $provider->save();
 
-        return view('welcome');
+        return redirect()->route('allBidding');
     }
     public function login()
     {
@@ -33,6 +33,7 @@ class ProviderController extends Controller
             dd($provider_id);
             session()->put("provider_id", $provider_id);
             return redirect()->route('provider.home');
+            // return redirect()->route('allBidding');
         }
         return 'Failed Login';
     }

@@ -3,25 +3,23 @@
 
 
 <div class="container">
-
-  <div class="row">
-      <div class="col-sm-12">
-        <div class="panel panel-default text-left">
-          <div class="panel-body">
-          <p contenteditable="false">Your Bidding: {{$user->name}}</p>
-          </div>
+    <div class="create" style="margin-bottom: 14px;">
+        <button type="button" class="btn btn-success btn-lg">bid</button>
+    </div>
+  <div class="row justify-content-center">
+    <div class="col-sm-12">
+      <div class="panel panel-default text-left">
+        <div class="panel-body">
+          <p contenteditable="false">Your Bidding: {{$bid->amount}}</p>
         </div>
       </div>
-    </div> 
+    </div>
+  </div> 
   <div class="row">
     <div class="col-md-3">
       <figure class="card card-product">
-        <div class="img-wrap"> 
-          <img src="https://s9.postimg.org/tupxkvfj3/image.jpg">
-          <a class="btn-overlay" href="#"><i class="fa fa-search-plus"></i> NumberOfBidder</a>
-        </div>
         <figcaption class="info-wrap">
-          <h6 class="title text-dots"><a href="#">Good item name</a></h6>
+          <h6 class="title text-dots"><a href="#">Bidder name</a></h6>
           <div class="action-wrap">
             <a href="#" class="btn btn-primary btn-sm float-right"> Buy </a>
             <div class="price-wrap h5">
@@ -34,9 +32,6 @@
     </div> <!-- col // -->
     <div class="col-md-3">
       <figure class="card card-product">
-        <div class="img-wrap"> <img src="https://s9.postimg.org/4ooze1tof/image.jpg">
-        <a class="btn-overlay" href="#"><i class="fa fa-search-plus"></i> NumberOfBidder</a>
-        </div>
         <figcaption class="info-wrap">
           <h6 class="title text-dots"><a href="#">The The provider Name!</a></h6>
           <div class="action-wrap">
@@ -50,9 +45,6 @@
     </div> <!-- col // -->
     <div class="col-md-3">
       <figure class="card card-product">
-        <div class="img-wrap"><img src="https://s9.postimg.org/ojb106167/image.jpg"> 
-        <a class="btn-overlay" href="#"><i class="fa fa-search-plus"></i> NumberOfBidder</a>
-        </div>
         <figcaption class="info-wrap">
           <h6 class="title text-dots"><a href="#">The provider Name!</a></h6>
           <div class="action-wrap">
@@ -66,9 +58,6 @@
     </div> <!-- col // -->
     <div class="col-md-3">
       <figure class="card card-product">
-        <div class="img-wrap"> <img src="https://s9.postimg.org/4ooze1tof/image.jpg">
-          <a class="btn-overlay" href="#"><i class="fa fa-search-plus"></i> NumberOfBidder</a>
-        </div>
         <figcaption class="info-wrap">
           <h6 class="title text-dots"><a href="#">The The provider Name!</a></h6>
           <div class="action-wrap">

@@ -10,7 +10,7 @@
       </div><br />
       @endif
     </div>
-      <form method="post" action="{{url('addBidding')}}">
+      <form method="post" action="{{url('postBid')}}">
         @csrf
 
         <div class="row">

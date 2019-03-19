@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBidsTable extends Migration
+class AddToBids extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateBidsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bids', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('amount');
+        Schema::table('bids', function (Blueprint $table) {
             $table->string('status');
-            $table->string('provider_id');
-            $table->timestamps();
         });
     }
+
     /**
      * Reverse the migrations.
      *
@@ -28,6 +25,8 @@ class CreateBidsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bids');
+        Schema::table('bids', function (Blueprint $table) {
+            //
+        });
     }
 }
