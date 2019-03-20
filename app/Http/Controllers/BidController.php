@@ -32,7 +32,7 @@ class BidController extends Controller
 
     public function createBid()
     {
-        return view('addBidding');
+        return view('postBidding');
     }
 
     public function biddingHistory()
