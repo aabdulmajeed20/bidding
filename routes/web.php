@@ -68,20 +68,24 @@ Route::post('add','BidController@store');
 Route::prefix('provider')->group(function() {
     
     Route::get('/register', [
-        'uses' => 'ProviderController@register',
+        'uses' => 'ProviderLoginController@register',
         'as' => 'register'
     ]);
     Route::post('/postRegister', [
-        'uses' => 'ProviderController@postRregister',
+        'uses' => 'ProviderLoginController@postRregister',
         'as' => 'provider.postRegister'
     ]);
     Route::get('/login', [
-        'uses' => 'ProviderController@login',
+        'uses' => 'ProviderLoginController@login',
         'as' => 'provider.login'
     ]);
     Route::post('/postLogin', [
-        'uses' => 'ProviderController@postLogin',
+        'uses' => 'ProviderLoginController@postLogin',
         'as' => 'provider.postLogin'
+    ]);
+    Route::get('/logout', [
+        'uses' => 'ProviderLoginController@getLogout',
+        'as' => 'provider.logout'
     ]);
     Route::get('home', [
         'uses' => 'ProviderController@home',

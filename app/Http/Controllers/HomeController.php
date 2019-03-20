@@ -27,7 +27,9 @@ class HomeController extends Controller
 
     public function postLogin()
     {
+        Cookie::queue(Cookie::forget('token'));
         $client = new Client();
+        // dd(request('email'), request('password'));
         try {
             $res = $client->post('http://localhost/wallet/public/api/login', [
                 'form_params' => [
@@ -36,7 +38,7 @@ class HomeController extends Controller
                 ]
             ]);
         } catch (\Throwable $th) {
-            return 'Unauthorized';
+            return $th;
         }
         $token = json_decode($res->getBody())->success->token;
         $name = json_decode($res->getBody())->success->name;

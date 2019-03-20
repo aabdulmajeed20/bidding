@@ -5,7 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
-use DesignMyNight\Mongodb\Auth\User as Authenticatable;
+// use DesignMyNight\Mongodb\Auth\User as Authenticatable;
+use Jenssegers\Mongodb\Auth\User as Authenticatable;
 
 class Provider extends Authenticatable
 {

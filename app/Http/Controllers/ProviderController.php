@@ -8,37 +8,14 @@ use Auth;
 
 class ProviderController extends Controller
 {
-    public function register()
+    public function __construct()
     {
-        return view('provider/register');
+        $this->middleware('auth:provider');
     }
-    public function postRregister()
-    {
-        $provider = new Provider();
-        $provider->name = request('name');
-        $provider->email = request('email');
-        $provider->password = bcrypt(request('password'));
-        $provider->save();
-
-        return redirect()->route('allBidding');
-    }
-    public function login()
-    {
-        return view('provider/login');
-    }
-    public function postLogin()
-    {
-        if(Auth::guard('provider')->attempt(['email' => request('email'), 'password' => request('password')])) {
-            $provider_id = Auth::guard('provider')->id();
-            dd($provider_id);
-            session()->put("provider_id", $provider_id);
-            return redirect()->route('provider.home');
-            // return redirect()->route('allBidding');
-        }
-        return 'Failed Login';
-    }
+    
     public function home()
-    {
-        return view('provider/home');
+    { 
+        $id = Provider::find(Auth::guard('provider')->id())->name;
+        return view('provider/home', ['id' => $id]);
     }
 }

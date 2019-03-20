@@ -68,7 +68,8 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ route('provider.home') }}">Home</a>
+                        <a href="{{ route('provider.logout') }}">Logout</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
@@ -81,7 +82,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel Provider Home
+                    Laravel Provider {{$id}}
                 </div>
 
                 <div class="links">
