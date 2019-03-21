@@ -19,7 +19,7 @@
             <thead>
               <tr>
                 <th>PROJECT NAME</th>
-                <th>BIDS</th> {{-- how many bids are there?  --}}
+                <th>Number of Offer	</th> {{-- how many bids are there?  --}}
                 <th>Bidder Name </th> {{-- who did you buy from!?   --}}
                 <th>AWARDED BID</th>  {{-- how much did u take the bid?!    --}}
                 <th>TIME</th>  {{-- EX: 1 year ago   --}}
@@ -31,17 +31,8 @@
               @foreach($bids as $bid)
                 <tr>
                   <td>{{$bid->amount}}</td>
-                  @if (count((array)$bid->provider_ids) <= 0)
-                    <td>0</td> {{-- {{($bid->provider_ids)->count()}} --}}
-                  @else
-                    <td>{{($bid->provider_ids)->count()}}</td> {{-- {{($bid->provider_ids)->count()}} --}}
-                  @endif
-                  @if ($bid->groupBy($bid->id)->avg('amount') <= 0)
-                    <td>0</td> {{-- {{$bid->groupBy($bid->id)->avg(amount)}} --}}
-                  @else
-                    <td>{{$bid->groupBy($bid->id)->avg(amount)}}</td> {{-- {{$bid->groupBy($bid->id)->avg(amount)}} --}}
-                  @endif
-                  
+                  <td>{{$bid->offer()->count()}}</td> 
+                  <td>{{$bid->offer()->groupBy($bid->id)->avg('price')}}</td> {{-- {{$bid->groupBy($bid->id)->avg(amount)}} --}}
                   <td>{{$bid->created_at}}</td>
                   <td>{{$bid->status}}</td>
                   <td>
@@ -64,7 +55,7 @@
             <thead>
                 <tr>
                     <th>NAME </th>
-                    <th>BIDS</th>
+                    <th>Number of Offer	</th>
                     <th>AVG BID</th>
                     <th>BID END DATE</th>
                     <th>Details</th>
@@ -75,7 +66,7 @@
                  @if ($bid->status == 'open')
                   <tr>
                       <td>{{$bid->id}}</td>
-                      <td>provider name</td> {{-- {{($bid->provider_ids)->count()}} --}}
+                      <td>{{$bid->offer()->count()}}</td> 
                       <td>avg bid</td> {{-- {{$bid->groupBy($bid->id)->avg(amount)}} --}}
                       <td>{{$bid->created_at}}</td>
                       <td> <button class="btn btn-default"><a href="{{route('bidDetails', ['bid_id' => $bid->id])}}">Details</a></button></td>
@@ -92,7 +83,7 @@
             <thead>
               <tr>
                 <th>PROJECT NAME</th>
-                <th>BIDS</th> {{-- how many bids are there?  --}}
+                <th>Number of Offer	</th> {{-- how many bids are there?  --}}
                 <th>Bidder Name </th> {{-- who did you buy from!?   --}}
                 <th>AWARDED BID</th>  {{-- how much did u take the bid?!    --}}
                 <th>TIME</th>  {{-- EX: 1 year ago   --}}
@@ -105,9 +96,9 @@
                 @if ($bid->status == "close")
                   <tr>
                     <td>{{$bid->id}}</td>
-                    <td>provider name</td> {{-- {{($bid->provider_ids)->count()}} --}}
+                    <td>{{$bid->offer()->count()}}	</td> {{-- {{($bid->provider_ids)->count()}} --}}
                     <td>{{$bid->first()->user()->first()->name}}</td> {{-- get the user name  --}}
-                    <td>max bidding</td> {{-- {{$bid->max(amount)}} --}}
+                    <td>{{$bid->offer()->max('price')}}</td> {{-- {{$bid->max(amount)}} --}}
                     <td>{{$bid->created_at}}</td>
                     <td>{{$bid->status}}</td>
       
