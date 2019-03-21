@@ -22,7 +22,6 @@ class BidController extends Controller
     public function postBid(Request $request)
     {
         $user_id = Session::get('user_id');
-
         $user = User::where('_id', $user_id)->first();
 
         $bid = new Bid ();
@@ -43,7 +42,6 @@ class BidController extends Controller
     {  
         $user_id = Session::get('user_id');        
         $bids = Bid::where('user_id', $user_id)->get();
-        // $offer = Offer::where('bid_id', $bids->id)->get();
         return view('biddingHistory', ['bids' => $bids]);
     }
 

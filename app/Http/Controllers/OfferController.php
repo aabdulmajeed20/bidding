@@ -30,7 +30,7 @@ class OfferController extends Controller
     {
         return view('provider/createOffer', ['bid_id' => $bid_id]);
     }
-    //
+    
 
     public function buyOffer($price)
     {
@@ -48,7 +48,6 @@ class OfferController extends Controller
         } catch (\Throwable $th) {
             return $th;
         }
-        
 
         return redirect()->route('biddingHistory');
     }

@@ -11,6 +11,7 @@ use App\User;
 
 class HomeController extends Controller
 {
+    //get user details
     public function home()
     {
         $client = new Client();
