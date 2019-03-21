@@ -96,5 +96,14 @@ Route::prefix('provider')->group(function() {
         'as' => 'allBidding'
     ]);
     
+    Route::get('/addOffer', [
+        'uses' => 'ProviderController@addOffer',
+        'as' => 'addOffer'
+    ]);
+
+    Route::post('/createOffer', [
+        'uses' => 'ProviderController@createOffer',
+        'as' => 'createOffer'
+    ]);
 }); 
 

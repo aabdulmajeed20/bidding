@@ -5,7 +5,7 @@
 <div class="container">
   @if(Auth::guard('provider')->check())
     <div class="create" style="margin-bottom: 14px;">
-        <button type="button" class="btn btn-success btn-lg">bid</button>
+        <button type="button" class="btn btn-success btn-lg">add offer</button>
     </div>
   @endif
   <div class="row justify-content-center">
@@ -17,7 +17,7 @@
       </div>
     </div>
   </div> 
-  @foreach ($offers as $offer)
+  {{-- @foreach ($offers as $offer) --}}
       
   
   <div class="row">
@@ -35,7 +35,7 @@
         </figcaption>
       </figure> <!-- card // -->
     </div> <!-- col // -->
-  @endforeach
+  {{-- @endforeach --}}
 
 
     <div class="col-md-3">

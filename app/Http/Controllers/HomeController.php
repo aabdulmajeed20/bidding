@@ -22,6 +22,8 @@ class HomeController extends Controller
                 ]
             ]);
         $name = json_decode($res->getBody())->success->name;
+        dd(Session::get('user_id'));
+
         return view('home', ['name' => $name]);
     }
 
@@ -53,6 +55,7 @@ class HomeController extends Controller
             $user->save();
         }
         Session::put('user_id', $user->id);
+
         // setcookie(, $token, time() + (86400 * 30), '/');
         Cookie::queue('token', $token, (86400 * 30));
 

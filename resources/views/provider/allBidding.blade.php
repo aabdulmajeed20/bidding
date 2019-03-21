@@ -13,7 +13,6 @@
               <tr>
                 <th>PROJECT NAME</th>
                 <th>BIDS</th> {{-- how many bids are there?  --}}
-                <th>Bidder Name </th> {{-- how did you buy from!?   --}}
                 <th>AWARDED BID</th>  {{-- how much did u take the bid?!    --}}
                 <th>TIME</th>  {{-- EX: 1 year ago   --}}
                 <th>Status</th>  {{-- EX: completed or incomleted   --}}
@@ -24,8 +23,8 @@
               @foreach($data as $bid)
                 <tr>
                   <td>{{$bid->id}}</td>
-                  <td>{{($bid->provider_ids)->count()}}</td>
-                  <td>{{$bid->groupBy($bid->id)->avg(amount)}}</td>
+                  <td>{{(count((array)$bid->provider_ids))}}</td>
+                  <td>{{$bid->avg('amount')}}</td>
                   <td>{{$bid->created_at}}</td>
                   <td>{{$bid->status}}</td>
                   <td> <button class="btn btn-default"><a href="{{route('bidDetails', ['bid_id' => $bid->id])}}">Details</a></button></td>

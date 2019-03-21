@@ -8,7 +8,8 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"> {{$name}} </div>
+                    session()->all()
+                <div class="card-header"> {{$name}}</div>
 
                 <div class="card-body">
                     @if (session('status'))
