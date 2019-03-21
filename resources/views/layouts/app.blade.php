@@ -35,9 +35,15 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Ewallet
                 </a>
-                <a class="navbar-brand" href="{{ url('/home') }}">
-                    Home
-                </a>
+                @if(Auth::guard('provider')->check())
+                    <a class="navbar-brand" href="{{ route('provider.home') }}">
+                        Home
+                    </a>
+                @else
+                    <a class="navbar-brand" href="{{ route('home') }}">
+                        Home
+                    </a>
+                @endif
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -72,10 +78,15 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                  @if(Auth::guard('provider')->check())    
+                                    <form id="logout-form" action="{{ route('provider.logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
+                                    @else
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    @endif
                                 </div>
                             </li>
                         @endguest

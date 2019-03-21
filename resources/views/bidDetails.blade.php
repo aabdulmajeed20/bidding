@@ -5,7 +5,7 @@
 <div class="container">
   @if(Auth::guard('provider')->check())
     <div class="create" style="margin-bottom: 14px;">
-        <button type="button" class="btn btn-success btn-lg">add offer</button>
+        <button type="button" class="btn btn- btn-lg"><a href="{{route('createOffer', ['bid_id' => $bid->id])}}">add offer</a></button>
     </div>
   @endif
   <div class="row justify-content-center">
@@ -16,29 +16,29 @@
         </div>
       </div>
     </div>
-  </div> 
-  {{-- @foreach ($offers as $offer) --}}
-      
-  
+  </div>
+
   <div class="row">
-    <div class="col-md-3">
+      @foreach ($offers as $offer)  
+    <div class="col-md-3" style="margin-top: 8px">
       <figure class="card card-product">
-        <figcaption class="info-wrap">
-          <h6 class="title text-dots"><a href="#">Bidder name</a></h6>
+        <figcaption class="info-wrap" style="padding: 5px;">
+          <h6 class="title text-dots"><a href="#">{{$offer->provider()->first()->name}}</a></h6>
           <div class="action-wrap">
+            @if(!Auth::guard('provider')->check())
             <a href="#" class="btn btn-primary btn-sm float-right"> Buy </a>
+            @endif
             <div class="price-wrap h5">
-              <span class="price-new">cbx1280</span>
-              <del class="price-old">cbx1980</del>
+              <span class="price-new">{{$offer->price}} cbx</span>
             </div> <!-- price-wrap.// -->
           </div> <!-- action-wrap -->
         </figcaption>
       </figure> <!-- card // -->
     </div> <!-- col // -->
-  {{-- @endforeach --}}
+  @endforeach
 
 
-    <div class="col-md-3">
+    {{-- <div class="col-md-3">
       <figure class="card card-product">
         <figcaption class="info-wrap">
           <h6 class="title text-dots"><a href="#">The The provider Name!</a></h6>
@@ -78,16 +78,9 @@
       </figure> <!-- card // -->
     </div> <!-- col // -->
   </div> <!-- row.// -->
-  </div> 
+  </div>  --}}
   <!--container end-->
 
   <br><br><br>
-  <article class="bg-secondary mb-3">  
-  <div class="card-body text-center">
-      <h4 class="text-white">جميع الحقوق محفوظة لي!  </h4>
-  <p class="h5 text-white">عمك أحمد</p>   <br>
-  <i class="fa fa-window-restore "></i></a></p>
-  </div>
-  </article>  
 
 @endsection

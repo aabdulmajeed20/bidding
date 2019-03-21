@@ -22,15 +22,12 @@ class HomeController extends Controller
                 ]
             ]);
         $name = json_decode($res->getBody())->success->name;
-        dd(Session::get('user_id'));
 
         return view('home', ['name' => $name]);
     }
 
     public function postLogin()
     {
-        Cookie::queue(Cookie::forget('XSRF-TOKEN'));
-        Cookie::queue(Cookie::forget('laravel_session'));
         $client = new Client();
         // dd(request('email'), request('password'));
         try {

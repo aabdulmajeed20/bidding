@@ -6,6 +6,7 @@ use App\Provider;
 use Auth;
 use App\Bid;
 use App\User;
+use App\Offer;
 use Session;
 
 class BidController extends Controller
@@ -13,15 +14,14 @@ class BidController extends Controller
 
     public function bidDetails($bid_id)
     {
-        // $offers = Offer::where('')
+        $offers = Offer::where('bid_id', $bid_id)->get();
         $bid = Bid::where('_id', $bid_id)->first();
-        return view('bidDetails', ['bid' => $bid]);
+        return view('bidDetails', ['bid' => $bid, 'offers' => $offers]);
     }
 
     public function postBid(Request $request)
     {
         $user_id = Session::get('user_id');
-        dd(session()->all());
 
         $user = User::where('_id', $user_id)->first();
 
