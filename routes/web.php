@@ -62,8 +62,10 @@ Route::get('/allBidding', [
     'as' => 'allBidding'
 ]);
 
-
-Route::post('add','BidController@store');
+Route::get('/buyOffer/{id}', [
+    'uses' => 'OfferController@buyOffer',
+    'as' => 'buyOffer'
+]);
 
 Route::prefix('provider')->group(function() {
     

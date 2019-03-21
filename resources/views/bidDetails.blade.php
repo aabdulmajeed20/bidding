@@ -26,7 +26,7 @@
           <h6 class="title text-dots"><a href="#">{{$offer->provider()->first()->name}}</a></h6>
           <div class="action-wrap">
             @if(!Auth::guard('provider')->check())
-            <a href="#" class="btn btn-primary btn-sm float-right"> Buy </a>
+            <a href="{{route('buyOffer', ['price' => $offer->price])}}" class="btn btn-primary btn-sm float-right"> Buy </a>
             @endif
             <div class="price-wrap h5">
               <span class="price-new">{{$offer->price}} cbx</span>
@@ -36,51 +36,6 @@
       </figure> <!-- card // -->
     </div> <!-- col // -->
   @endforeach
-
-
-    {{-- <div class="col-md-3">
-      <figure class="card card-product">
-        <figcaption class="info-wrap">
-          <h6 class="title text-dots"><a href="#">The The provider Name!</a></h6>
-          <div class="action-wrap">
-            <a href="#" class="btn btn-primary btn-sm float-right"> Buy </a>
-            <div class="price-wrap h5">
-              <span class="price-new">cbx280</span>
-            </div> <!-- price-wrap.// -->
-          </div> <!-- action-wrap -->
-        </figcaption>
-      </figure> <!-- card // -->
-    </div> <!-- col // -->
-    <div class="col-md-3">
-      <figure class="card card-product">
-        <figcaption class="info-wrap">
-          <h6 class="title text-dots"><a href="#">The provider Name!</a></h6>
-          <div class="action-wrap">
-            <a href="#" class="btn btn-primary btn-sm float-right"> Buy </a>
-            <div class="price-wrap h5">
-              <span class="price-new">cbx280</span>
-            </div> <!-- price-wrap.// -->
-          </div> <!-- action-wrap -->
-        </figcaption>
-      </figure> <!-- card // -->
-    </div> <!-- col // -->
-    <div class="col-md-3">
-      <figure class="card card-product">
-        <figcaption class="info-wrap">
-          <h6 class="title text-dots"><a href="#">The The provider Name!</a></h6>
-          <div class="action-wrap">
-            <a href="#" class="btn btn-primary btn-sm float-right"> Buy </a>
-            <div class="price-wrap h5">
-              <span class="price-new">cbx280</span>
-            </div> <!-- price-wrap.// -->
-          </div> <!-- action-wrap -->
-        </figcaption>
-      </figure> <!-- card // -->
-    </div> <!-- col // -->
-  </div> <!-- row.// -->
-  </div>  --}}
-  <!--container end-->
-
   <br><br><br>
 
 @endsection

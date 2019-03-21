@@ -7,7 +7,8 @@ use App\Offer;
 use App\Provider;
 use App\Bid;
 use Auth;
-
+use GuzzleHttp\Client;
+use Cookie;
 class OfferController extends Controller
 {
 
@@ -30,4 +31,25 @@ class OfferController extends Controller
         return view('provider/createOffer', ['bid_id' => $bid_id]);
     }
     //
+
+    public function buyOffer($price)
+    {
+        $client = new Client();
+        $accessToken = Cookie::get('token');
+        try {
+            $res = $client->post('http://localhost/wallet/public/api/plusWallet', [
+                'headers' =>  [
+                    'Authorization' => 'Bearer '.$accessToken,
+                ],
+                'form_params' => [
+                    'cbx' => $price
+                ]
+            ]);
+        } catch (\Throwable $th) {
+            return $th;
+        }
+        
+
+        return redirect()->route('biddingHistory');
+    }
 }
