@@ -40,8 +40,7 @@ class ProviderLoginController extends Controller
             // dd($provider_id);
             Session::put("provider_id", $provider_id);
             
-            return redirect()->route('provider.home');
-            // return redirect()->route('allBidding');
+            return redirect()->route('allBidding');
         }
         return 'Failed Login';
     }

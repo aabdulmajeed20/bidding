@@ -13,6 +13,7 @@ class BidController extends Controller
 
     public function bidDetails($bid_id)
     {
+        // $offers = Offer::where('')
         $bid = Bid::where('_id', $bid_id)->first();
         return view('bidDetails', ['bid' => $bid]);
     }
@@ -46,6 +47,6 @@ class BidController extends Controller
     public function allBidding()
     {
         $data = Bid::where('status', 'open')->get();
-        return view('allBidding', ['data' => $data]);
+        return view('provider/allBidding', ['data' => $data]);
     }
 }

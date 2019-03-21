@@ -3,9 +3,11 @@
 
 
 <div class="container">
+  @if(Auth::guard('provider')->check())
     <div class="create" style="margin-bottom: 14px;">
         <button type="button" class="btn btn-success btn-lg">bid</button>
     </div>
+  @endif
   <div class="row justify-content-center">
     <div class="col-sm-12">
       <div class="panel panel-default text-left">
@@ -15,6 +17,9 @@
       </div>
     </div>
   </div> 
+  @foreach ($offers as $offer)
+      
+  
   <div class="row">
     <div class="col-md-3">
       <figure class="card card-product">
@@ -30,6 +35,9 @@
         </figcaption>
       </figure> <!-- card // -->
     </div> <!-- col // -->
+  @endforeach
+
+
     <div class="col-md-3">
       <figure class="card card-product">
         <figcaption class="info-wrap">

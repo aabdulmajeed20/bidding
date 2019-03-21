@@ -27,7 +27,8 @@ class HomeController extends Controller
 
     public function postLogin()
     {
-        Cookie::queue(Cookie::forget('token'));
+        Cookie::queue(Cookie::forget('XSRF-TOKEN'));
+        Cookie::queue(Cookie::forget('laravel_session'));
         $client = new Client();
         // dd(request('email'), request('password'));
         try {

@@ -91,6 +91,10 @@ Route::prefix('provider')->group(function() {
         'uses' => 'ProviderController@home',
         'as' => 'provider.home'
     ]);
+    Route::get('/allBidding', [
+        'uses' => 'BidController@allBidding',
+        'as' => 'allBidding'
+    ]);
     
 }); 
 
