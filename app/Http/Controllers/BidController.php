@@ -14,9 +14,19 @@ class BidController extends Controller
 
     public function bidDetails($bid_id)
     {
-        $offers = Offer::where('bid_id', $bid_id)->get();
+      $offerable = True;
+      if(Auth::guard('provider')->check()){
+
+        $offers = Offer::where('bid_id', $bid_id)->where('provider_id',Auth::guard('provider')->id())->get()->count();
+        if($offers > 0) $offerable = False;
+      }
+        if(Auth::guard('provider')->check()){
+          $offers = Offer::where('bid_id', $bid_id)->where('provider_id',Auth::guard('provider')->id())->get();
+        }else{
+          $offers = Offer::where('bid_id', $bid_id)->get();
+        }
         $bid = Bid::where('_id', $bid_id)->first();
-        return view('bidDetails', ['bid' => $bid, 'offers' => $offers]);
+        return view('bidDetails', ['bid' => $bid, 'offers' => $offers, 'offerable' => $offerable]);
     }
 
     public function postBid(Request $request)
@@ -39,8 +49,8 @@ class BidController extends Controller
     }
 
     public function biddingHistory()
-    {  
-        $user_id = Session::get('user_id');        
+    {
+        $user_id = Session::get('user_id');
         $bids = Bid::where('user_id', $user_id)->get();
         return view('biddingHistory', ['bids' => $bids]);
     }
@@ -49,5 +59,6 @@ class BidController extends Controller
     {
         $data = Bid::where('status', 'open')->get();
         return view('provider/allBidding', ['data' => $data]);
+
     }
 }

@@ -57,7 +57,7 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                        @if(empty(Cookie::get('token'))) 
+                        @if(empty(Cookie::get('token')))
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
@@ -69,7 +69,7 @@
                         @else
                             <li class="nav-item dropdown" style="padding-left: 800px;">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{Session::get('user_id')}} <span class="caret"></span>
+                                    {{\App\User::find(Session::get('user_id'))->firstname}}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -78,7 +78,7 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-                                  @if(Auth::guard('provider')->check())    
+                                  @if(Auth::guard('provider')->check())
                                     <form id="logout-form" action="{{ route('provider.logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>

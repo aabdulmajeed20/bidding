@@ -3,23 +3,23 @@
 
 
 <div class="container">
-  @if(Auth::guard('provider')->check())
+  @if(Auth::guard('provider')->check() && $offerable)
     <div class="create" style="margin-bottom: 14px;">
-        <button type="button" class="btn btn- btn-lg"><a href="{{route('createOffer', ['bid_id' => $bid->id])}}">add offer</a></button>
+        <a class="btn btn-primary btn-lg" href="{{route('createOffer', ['bid_id' => $bid->id])}}">Add an offer</a>
     </div>
   @endif
   <div class="row justify-content-center">
     <div class="col-sm-12">
       <div class="panel panel-default text-left">
         <div class="panel-body">
-          <p contenteditable="false">Your Bidding: {{$bid->amount}}</p>
+          <p contenteditable="false">Request Amount: {{$bid->amount}} CBX</p>
         </div>
       </div>
     </div>
   </div>
 
   <div class="row">
-      @foreach ($offers as $offer)  
+      @foreach ($offers as $offer)
     <div class="col-md-3" style="margin-top: 8px">
       <figure class="card card-product">
         <figcaption class="info-wrap" style="padding: 5px;">
@@ -29,7 +29,7 @@
             <a href="{{route('buyOffer', ['price' => $offer->price])}}" class="btn btn-primary btn-sm float-right"> Buy </a>
             @endif
             <div class="price-wrap h5">
-              <span class="price-new">{{$offer->price}} cbx</span>
+              <span class="price-new">{{$offer->price}}</span>
             </div> <!-- price-wrap.// -->
           </div> <!-- action-wrap -->
         </figcaption>

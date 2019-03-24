@@ -16,13 +16,15 @@ class HomeController extends Controller
     {
         $client = new Client();
         $accessToken = Cookie::get('token');
-        $res = $client->get('http://localhost/wallet/public/api/details', [
+        $res = $client->get('http://'.env('CBX_API').'/api/details', [
             'headers' =>  [
                 'Accept' => 'application/json',
                 'Authorization' => 'Bearer '.$accessToken,
                 ]
             ]);
-        $name = json_decode($res->getBody())->success->name;
+        $firstname = json_decode($res->getBody())->success->firstname;
+        $lastname = json_decode($res->getBody())->success->lastname;
+        $name = $firstname.' '.$lastname;
 
         return view('home', ['name' => $name]);
     }
@@ -32,22 +34,25 @@ class HomeController extends Controller
         $client = new Client();
         // dd(request('email'), request('password'));
         try {
-            $res = $client->post('http://localhost/wallet/public/api/login', [
+            $res = $client->post('http://'.env('CBX_API').'/api/login', [
                 'form_params' => [
                     'email' => request('email'),
                     'password' => request('password')
+
                 ]
             ]);
         } catch (\Throwable $th) {
             return $th;
         }
         $token = json_decode($res->getBody())->success->token;
-        $name = json_decode($res->getBody())->success->name;
+        $firstname = json_decode($res->getBody())->success->firstname;
+        $lastname = json_decode($res->getBody())->success->lastname;
         $email = json_decode($res->getBody())->success->email;
         $user = User::where('email', $email)->first();
         if(!$user){
             $user = new User();
-            $user->name = $name;
+            $user->firstname = $firstname;
+            $user->lastname = $lastname;
             $user->email = $email;
             $user->remember_token = $token;
             $user->save();
@@ -58,7 +63,7 @@ class HomeController extends Controller
         Cookie::queue('token', $token, (86400 * 30));
 
         return redirect()->route('home');
-        
+
     }
 
     public function login()
@@ -78,7 +83,7 @@ class HomeController extends Controller
         Cookie::queue(
             Cookie::forget('token')
         );
-        
+
         Session::forget('user_id');
         return view('welcome');
     }

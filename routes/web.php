@@ -58,8 +58,8 @@ Route::get('/bidDetails/{bid_id}', [
     'as' => 'bidDetails'
 ]);
 Route::get('/allBidding', [
-    'uses' => 'BidController@allBidding',
-    'as' => 'allBidding'
+    'uses' => 'BidController@userAllBidding',
+    'as' => 'userAllBidding'
 ]);
 
 Route::get('/buyOffer/{id}', [
@@ -68,7 +68,7 @@ Route::get('/buyOffer/{id}', [
 ]);
 
 Route::prefix('provider')->group(function() {
-    
+
     Route::get('/register', [
         'uses' => 'ProviderLoginController@register',
         'as' => 'register'
@@ -97,7 +97,7 @@ Route::prefix('provider')->group(function() {
         'uses' => 'BidController@allBidding',
         'as' => 'allBidding'
     ]);
-    
+
     Route::post('/bidDetails/{bid_id}/addOffer', [
         'uses' => 'OfferController@addOffer',
         'as' => 'addOffer'
@@ -107,5 +107,4 @@ Route::prefix('provider')->group(function() {
         'uses' => 'OfferController@createOffer',
         'as' => 'createOffer'
     ]);
-}); 
-
+});
