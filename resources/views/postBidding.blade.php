@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    
+
 
   <div class="container">
     <br/>
@@ -10,13 +10,13 @@
       </div><br />
       @endif
     </div>
-      <form method="post" action="{{url('postBid')}}">
+      <form method="post" action="{{route('postBid')}}">
         @csrf
 
         <div class="row">
           <div class="col-md-4"></div>
           <div class="form-group col-md-4">
-            <label for="amount">amount: {{Session::get('user_id')}}</label>
+            <label for="amount">CBX Amount:</label>
             <input type="number" step="0.001" class="form-control" name="amount" required>
           </div>
         </div>

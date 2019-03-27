@@ -71,7 +71,7 @@
                         <a href="{{ url('/home') }}">Home</a>
                     @else
                         <a href="{{ route('login') }}">Login as user</a>
-                        <a href="{{ route('provider.login') }}">Login as provider</a>
+                        <a href="{{ route('underwriter.login') }}">Login as an underwriter</a>
 
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}">Register</a>

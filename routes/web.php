@@ -26,19 +26,19 @@ Route::get('/login', [
 ]);
 
 
-// the provider will bid
-Route::get('/addBid', [
+// the underwriter will bid
+Route::get('/addIssuanceRequest', [
     'uses' => 'BidController@createBid',
     'as' => 'addBid'
 ]);
 
-// will create the provider bidding
-Route::post('/postBid', [
+// will create the underwriter bidding
+Route::post('/postIssuanceRequest', [
     'uses' => 'BidController@postBid',
     'as' => 'postBid'
 ]);
 
-Route::get('/biddingHistory', [
+Route::get('/issuanceRequestsHistory', [
     'uses' => 'BidController@biddingHistory',
     'as' => 'biddingHistory'
 ]);
@@ -53,13 +53,9 @@ Route::post('/logout', [
     'as' => 'logout'
 ]);
 
-Route::get('/bidDetails/{bid_id}', [
+Route::get('/requestDetails/{bid_id}', [
     'uses' => 'BidController@bidDetails',
     'as' => 'bidDetails'
-]);
-Route::get('/allBidding', [
-    'uses' => 'BidController@userAllBidding',
-    'as' => 'userAllBidding'
 ]);
 
 Route::get('/buyOffer/{id}', [
@@ -67,43 +63,43 @@ Route::get('/buyOffer/{id}', [
     'as' => 'buyOffer'
 ]);
 
-Route::prefix('provider')->group(function() {
+Route::prefix('underwriter')->group(function() {
 
     Route::get('/register', [
-        'uses' => 'ProviderLoginController@register',
+        'uses' => 'underwriterLoginController@register',
         'as' => 'register'
     ]);
     Route::post('/postRegister', [
-        'uses' => 'ProviderLoginController@postRregister',
-        'as' => 'provider.postRegister'
+        'uses' => 'underwriterLoginController@postRregister',
+        'as' => 'underwriter.postRegister'
     ]);
     Route::get('/login', [
-        'uses' => 'ProviderLoginController@login',
-        'as' => 'provider.login'
+        'uses' => 'underwriterLoginController@login',
+        'as' => 'underwriter.login'
     ]);
     Route::post('/postLogin', [
-        'uses' => 'ProviderLoginController@postLogin',
-        'as' => 'provider.postLogin'
+        'uses' => 'underwriterLoginController@postLogin',
+        'as' => 'underwriter.postLogin'
     ]);
     Route::get('/logout', [
-        'uses' => 'ProviderLoginController@getLogout',
-        'as' => 'provider.logout'
+        'uses' => 'underwriterLoginController@getLogout',
+        'as' => 'underwriter.logout'
     ]);
     Route::get('home', [
-        'uses' => 'ProviderController@home',
-        'as' => 'provider.home'
+        'uses' => 'underwriterController@home',
+        'as' => 'underwriter.home'
     ]);
-    Route::get('/allBidding', [
+    Route::get('/allRequests', [
         'uses' => 'BidController@allBidding',
         'as' => 'allBidding'
     ]);
 
-    Route::post('/bidDetails/{bid_id}/addOffer', [
+    Route::post('/requestDetails/{bid_id}/addOffer', [
         'uses' => 'OfferController@addOffer',
         'as' => 'addOffer'
     ]);
 
-    Route::get('/bidDetails/{bid_id}/createOffer', [
+    Route::get('/requestDetails/{bid_id}/createOffer', [
         'uses' => 'OfferController@createOffer',
         'as' => 'createOffer'
     ]);

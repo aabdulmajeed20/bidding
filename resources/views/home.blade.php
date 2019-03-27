@@ -3,13 +3,10 @@
 @section('content')
 <div class="container">
     <div class="create">
-        <button type="button" class="btn btn-success btn-lg" onclick="window.location.href='{{ route('addBid') }}'">Create bidding</button>
     </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"> </div>
-
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -17,12 +14,12 @@
                         </div>
                     @endif
 
-                    <div class="row">
-                        <div class="col-md-4">
-                            <a href="#" class="btn btn-success full-button"><h3>Open Bid</h3></a>
+                    <div class="row text-center">
+                        <div class="col-md-6">
+                         <a class="btn btn-success btn-lg" href="{{ route('addBid') }}"><h3>Create Request</h3></a>
                         </div>
                         <div class="col-md-6">
-                            <a href="{{ route('biddingHistory') }}" class="btn btn-primary full-button"><h3>Show bidding History</h3></a>
+                            <a href="{{ route('biddingHistory') }}" class="btn btn-primary btn-lg"><h3>Show bidding History</h3></a>
                         </div>
                     </div>
                 </div>

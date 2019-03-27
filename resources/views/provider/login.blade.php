@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action=" {{route('provider.postLogin')}} ">
+                    <form method="POST" action=" {{route('underwriter.postLogin')}} ">
                         @csrf
 
                         <div class="form-group row">

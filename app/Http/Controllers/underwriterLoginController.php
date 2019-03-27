@@ -7,7 +7,7 @@ use App\Provider;
 use Auth;
 use Session;
 
-class ProviderLoginController extends Controller
+class underwriterLoginController extends Controller
 {
 
     public function __construct()
@@ -35,11 +35,11 @@ class ProviderLoginController extends Controller
     public function postLogin()
     {
         if(Auth::guard('provider')->attempt(['email' => request('email'), 'password' => request('password')])) {
-            
+
             $provider_id = Auth::guard('provider')->id();
             // dd($provider_id);
             Session::put("provider_id", $provider_id);
-            
+
             return redirect()->route('allBidding');
         }
         return 'Failed Login';
@@ -48,6 +48,6 @@ class ProviderLoginController extends Controller
     public function getLogout()
     {
         Auth::guard('provider')->logout();
-        return redirect('/provider/login');
+        return redirect('/underwriter/login');
     }
 }
