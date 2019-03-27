@@ -47,7 +47,7 @@
 
                 @endif
                 </li>
-                @if(empty(Cookie::get('token')))
+                @if(empty(Cookie::get('user_id')))
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                     </li>
