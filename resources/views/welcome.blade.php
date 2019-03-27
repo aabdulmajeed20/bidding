@@ -82,7 +82,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Bidding
+                    <h2>Cash 4 Grain</h2>
                 </div>
             </div>
         </div>
