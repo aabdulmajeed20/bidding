@@ -34,15 +34,22 @@
                   <td>{{$bid->amount}} CBX</td>
                   <td>{{$bid->offer()->count()}} offer(s)</td>
                   <td>{{$bid->created_at}}</td>
-                  <td>{{$bid->status}}</td>
+
+                  @if ($bid->status == "open")
+                    <td><strong class="text-success">OPEN</strong></td>
+                  @else
+                    <td><strong class="text-danger">CLOSED</strong></td>
+                  @endif
                   <td colspan="2">
                     <div class="row">
                       <div class="col-md-4">
                         <a class="btn btn-default" href="#"><i class="fas fa-flag"></i></a>
                       </div>
-                      <div class="col-md-4">
-                        <a class="btn btn-default" href="#"><i class="fas fa-trash"></i></a>
-                      </div>
+                      @if ($bid->status == "open")
+                        <div class="col-md-4">
+                          <a class="btn btn-default" href="#"><i class="fas fa-trash"></i></a>
+                        </div>
+                      @endif
                       <div class="col-md-4">
                         <a class="btn btn-default" href="{{route('bidDetails', ['bid_id' => $bid->id])}}"><i class="fas fa-book-open"></i></a>
                       </div>
@@ -59,11 +66,11 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>NAME </th>
-                    <th>Number of Offer	</th>
-                    <th>AVG BID</th>
-                    <th>BID END DATE</th>
-                    <th>Details</th>
+                    <th>Request ID </th>
+                    <th>Amount</th>
+                    <th>Number of Offers</th>
+                    <th>Timestamp</th>
+                    <th colspan="2">Tools</th>
                   </tr>
              </thead>
              <tbody>
@@ -71,10 +78,22 @@
                  @if ($bid->status == 'open')
                   <tr>
                       <td>{{$bid->id}}</td>
-                      <td>{{$bid->offer()->count()}}</td>
-                      <td>avg bid</td> {{-- {{$bid->groupBy($bid->id)->avg(amount)}} --}}
+                      <td>{{$bid->amount}} CBX</td>
+                      <td>{{$bid->offer()->count()}} offer(s)</td>
                       <td>{{$bid->created_at}}</td>
-                      <td> <button class="btn btn-default"><a href="{{route('bidDetails', ['bid_id' => $bid->id])}}">Details</a></button></td>
+                      <td colspan="2">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <a class="btn btn-default" href="#"><i class="fas fa-flag"></i></a>
+                          </div>
+                          <div class="col-md-4">
+                            <a class="btn btn-default" href="#"><i class="fas fa-trash"></i></a>
+                          </div>
+                          <div class="col-md-4">
+                            <a class="btn btn-default" href="{{route('bidDetails', ['bid_id' => $bid->id])}}"><i class="fas fa-book-open"></i></a>
+                          </div>
+                        </div>
+                      </td>
                     </tr>
                  @endif
                 @endforeach
@@ -87,13 +106,11 @@
           <table class="table table-bordered">
             <thead>
               <tr>
-                <th>PROJECT NAME</th>
-                <th>Number of Offer	</th> {{-- how many bids are there?  --}}
-                <th>Bidder Name </th> {{-- who did you buy from!?   --}}
-                <th>AWARDED BID</th>  {{-- how much did u take the bid?!    --}}
-                <th>TIME</th>  {{-- EX: 1 year ago   --}}
-                <th>Status</th>  {{-- EX: completed or incomleted   --}}
-                <th>ACTION</th>
+                <th>Request ID</th>
+                <th>Number of Offers</th> {{-- how many bids are there?  --}}
+                <th>Purchase Price</th>  {{-- how much did u take the bid?!    --}}
+                <th>Timestamp</th>  {{-- EX: 1 year ago   --}}
+                <th colspan="2">Tools</th>
               </tr>
             </thead>
             <tbody>
@@ -101,18 +118,18 @@
                 @if ($bid->status == "close")
                   <tr>
                     <td>{{$bid->id}}</td>
-                    <td>{{$bid->offer()->count()}}	</td> {{-- {{($bid->provider_ids)->count()}} --}}
-                    <td>{{$bid->first()->user()->first()->name}}</td> {{-- get the user name  --}}
+                    <td>{{$bid->offer()->count()}}	offer(s)</td> {{-- {{($bid->provider_ids)->count()}} --}}
                     <td>{{$bid->offer()->max('price')}}</td> {{-- {{$bid->max(amount)}} --}}
                     <td>{{$bid->created_at}}</td>
-                    <td>{{$bid->status}}</td>
-
-                    <td>
-                      <select id="selectbox" data-selected="">
-                          <option value="" selected="selected" disabled="disabled">Select</option>
-                          <option value="1">Repost</option>
-                          <option value="2">Delete</option>
-                        </select>
+                    <td colspan="2">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <a class="btn btn-default" href="#"><i class="fas fa-flag"></i></a>
+                        </div>
+                        <div class="col-md-6">
+                          <a class="btn btn-default" href="{{route('bidDetails', ['bid_id' => $bid->id])}}"><i class="fas fa-book-open"></i></a>
+                        </div>
+                      </div>
                     </td>
                 </tr>
                @endif
