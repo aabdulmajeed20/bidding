@@ -9,8 +9,6 @@ use App\Bid;
 use Auth;
 use GuzzleHttp\Client;
 use Cookie;
-use Session;
-
 class OfferController extends Controller
 {
 
