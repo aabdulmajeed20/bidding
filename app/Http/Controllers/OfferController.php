@@ -9,6 +9,8 @@ use App\Bid;
 use Auth;
 use GuzzleHttp\Client;
 use Cookie;
+use Session;
+
 class OfferController extends Controller
 {
 
@@ -30,25 +32,38 @@ class OfferController extends Controller
     {
         return view('provider/createOffer', ['bid_id' => $bid_id]);
     }
-    
 
-    public function buyOffer($price)
+
+    public function buyOffer($offer)
     {
+        $offer = Offer::where('_id',$offer)->first();
+        $issueRequest = $offer->bid()->first();
         $client = new Client();
         $accessToken = Cookie::get('token');
         try {
-            $res = $client->post('http://localhost/wallet/public/api/plusWallet', [
+            $res = $client->post('http://'.env("CBX_API").'/api/Issue', [
                 'headers' =>  [
                     'Authorization' => 'Bearer '.$accessToken,
                 ],
                 'form_params' => [
-                    'cbx' => $price
+                    'amount' => $offer->price,
+                    'underwriter' => $offer->provider_id
                 ]
             ]);
+
         } catch (\Throwable $th) {
             return $th;
         }
+        $response = json_decode($res->getBody(), false, 512, JSON_BIGINT_AS_STRING);
 
-        return redirect()->route('biddingHistory');
+        $issueRequest->status = 'closed';
+        //$issueRequest->save();
+        $purchase['request'] = $issueRequest;
+        $purchase['offer'] = $offer;
+        $purchase['status'] = 'success';
+        $purchase['token'] = $response->token;
+        //dd($purchase);
+        return view('purchaseStatus')->with('purchase', $purchase);
     }
+
 }
