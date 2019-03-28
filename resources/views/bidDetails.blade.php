@@ -26,7 +26,7 @@
           <h6 class="title text-dots"><a href="#">{{$offer->provider()->first()->name}}</a></h6>
           <div class="action-wrap">
             @if(!Auth::guard('provider')->check())
-            <a href="{{route('buyOffer', ['price' => $offer->price])}}" class="btn btn-primary btn-sm float-right"> Buy </a>
+            <a href="{{route('buyOffer', ['id' => $offer->id])}}" class="btn btn-primary btn-sm float-right"> Buy </a>
             @endif
             <div class="price-wrap h5">
               <span class="price-new">{{$offer->price}}</span>
