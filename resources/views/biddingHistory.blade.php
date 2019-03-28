@@ -115,7 +115,7 @@
             </thead>
             <tbody>
               @foreach($bids as $bid)
-                @if ($bid->status == "close")
+                @if ($bid->status == "closed")
                   <tr>
                     <td>{{$bid->id}}</td>
                     <td>{{$bid->offer()->count()}}	offer(s)</td> {{-- {{($bid->provider_ids)->count()}} --}}
