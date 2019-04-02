@@ -16,19 +16,72 @@ class HomeController extends Controller
     {
         $client = new Client();
         $accessToken = Cookie::get('token');
+
+          $res = $client->get('http://'.env('CBX_API').'/api/details', [
+              'headers' =>  [
+                  'Accept' => 'application/json',
+                  'Authorization' => 'Bearer '.$accessToken,
+                ],
+                'exceptions' => false,
+              ]);
+
+        if($res->getStatusCode() == 401){
+          return redirect()->route('login');
+        }
+        if(!Session::get('user_id')){
+          $token = $accessToken;
+          $firstname = json_decode($res->getBody())->success->firstname;
+          $lastname = json_decode($res->getBody())->success->lastname;
+          $email = json_decode($res->getBody())->success->email;
+          $user = User::where('email', $email)->first();
+
+              if(!$user){
+                  $user = new User();
+                  $user->firstname = $firstname;
+                  $user->lastname = $lastname;
+                  $user->email = $email;
+                  $user->remember_token = $token;
+                  $user->save();
+              }
+
+          Session::put('user_id', $user->id);
+          }
+
+        return view('home');
+    }
+    public function autoLogin($token)
+    {
+        $client = new Client();
+
+        $accessToken = base64_decode($token);
+
         $res = $client->get('http://'.env('CBX_API').'/api/details', [
             'headers' =>  [
                 'Accept' => 'application/json',
                 'Authorization' => 'Bearer '.$accessToken,
                 ]
             ]);
+
+        $token = $accessToken;
         $firstname = json_decode($res->getBody())->success->firstname;
         $lastname = json_decode($res->getBody())->success->lastname;
-        $name = $firstname.' '.$lastname;
+        $email = json_decode($res->getBody())->success->email;
+        $user = User::where('email', $email)->first();
 
-        return view('home', ['name' => $name]);
+            if(!$user){
+                $user = new User();
+                $user->firstname = $firstname;
+                $user->lastname = $lastname;
+                $user->email = $email;
+                $user->remember_token = $token;
+                $user->save();
+            }
+
+        Session::put('user_id', $user->id);
+        Cookie::queue('token', $token, (86400 * 30));
+
+        return redirect()->route('home');
     }
-
     public function postLogin()
     {
         $client = new Client();
