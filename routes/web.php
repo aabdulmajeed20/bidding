@@ -12,6 +12,14 @@
 */
 
 Route::get('/', function () {
+  if(Cookie::get('token')){
+    if(Auth::guard('provider')->check()){
+      return redirect()->route('allBidding');
+    }else{
+      return redirect()->action('HomeController@home');
+    }
+  }
+
     return view('welcome');
 });
 
