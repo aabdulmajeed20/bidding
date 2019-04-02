@@ -33,6 +33,10 @@ Route::get('/login', [
     'as' => 'login'
 ]);
 
+Route::get('/auth/{token}', [
+    'uses' => 'HomeController@autoLogin',
+    'as' => 'autoLogin'
+]);
 
 // the underwriter will bid
 Route::get('/addIssuanceRequest', [
