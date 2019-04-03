@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Provider;
 use Auth;
 
-class ProviderController extends Controller
+class underwriterController extends Controller
 {
     public function __construct()
     {
@@ -17,5 +17,17 @@ class ProviderController extends Controller
     { 
         $id = Provider::find(Auth::guard('provider')->id())->name;
         return view('provider/home', ['id' => $id]);
+    }
+
+    public function AllBidding()
+    {
+        # Check if usser has contract or not?!...
+        
+        return view('provider/allBidding');
+    }
+
+    public function contractOption()
+    {
+        return view('provider/contractOption');
     }
 }
