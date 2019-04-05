@@ -12,6 +12,7 @@
             <thead>
               <tr>
                 <th>ID</th>
+                <th>Amount</th> {{-- how many bids are there?  --}}
                 <th>Offers Count</th> {{-- how many bids are there?  --}}
                 <th>Offerable?</th>  {{-- how much did u take the bid?!    --}}
                 <th>Post Time</th>  {{-- EX: 1 year ago   --}}
@@ -23,6 +24,7 @@
               @foreach($data as $bid)
                 <tr>
                   <td>{{$bid->id}}</td>
+                  <td>{{$bid->amount}} CBX</td>
                   <td>{{$bid->offer()->count()}}</td>
                   @if ($bid->offer()->where('provider_id',Auth::guard('provider')->id())->count() > 0)
                     <td><span class="text-danger">False</span></td>
