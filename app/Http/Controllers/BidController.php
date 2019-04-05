@@ -33,9 +33,10 @@ class BidController extends Controller
     {
         $user_id = Session::get('user_id');
         $user = User::where('_id', $user_id)->first();
-
+        
         $bid = new Bid ();
         $bid->amount = $request->amount;
+        $bid->cover = $request->cover;
         $bid->status = "open";
 
         $bid =  $user->bid()->save($bid);
