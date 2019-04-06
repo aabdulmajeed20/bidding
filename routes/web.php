@@ -93,7 +93,7 @@ Route::prefix('underwriter')->group(function() {
         'uses' => 'underwriterLoginController@postLogin',
         'as' => 'underwriter.postLogin'
     ]);
-    Route::get('/logout', [
+    Route::post('/logout', [
         'uses' => 'underwriterLoginController@getLogout',
         'as' => 'underwriter.logout'
     ]);
