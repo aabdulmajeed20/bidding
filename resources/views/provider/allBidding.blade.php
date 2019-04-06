@@ -22,24 +22,26 @@
             </thead>
             <tbody>
               @foreach($data as $bid)
-                <tr>
-                  <td>{{$bid->id}}</td>
-                  <td>{{$bid->amount}} CBX</td>
-                  <td>{{$bid->offer()->count()}}</td>
-                  @if ($bid->offer()->where('provider_id',Auth::guard('provider')->id())->count() > 0)
-                    <td><span class="text-danger">False</span></td>
-                  @else
-                    <td><span class="text-success">True</span></td>
-                  @endif
+                @if ($bid->cover == Auth::guard('provider')->user()->cover)
+                  <tr>
+                    <td>{{$bid->id}}</td>
+                    <td>{{$bid->amount}} CBX</td>
+                    <td>{{$bid->offer()->count()}}</td>
+                    @if ($bid->offer()->where('provider_id',Auth::guard('provider')->id())->count() > 0)
+                      <td><span class="text-danger">False</span></td>
+                    @else
+                      <td><span class="text-success">True</span></td>
+                    @endif
 
-                  <td>{{$bid->created_at}}</td>
-                  @if ($bid->status == 'open')
-                    <td><span class="text-success">OPEN</span></td>
-                  @else
-                    <td><span class="text-danger">CLOSED</span></td>
-                  @endif
-                  <td> <a class="btn btn-default" href="{{route('bidDetails', ['bid_id' => $bid->id])}}">Details</a></td>
-                </tr>
+                    <td>{{$bid->created_at}}</td>
+                    @if ($bid->status == 'open')
+                      <td><span class="text-success">OPEN</span></td>
+                    @else
+                      <td><span class="text-danger">CLOSED</span></td>
+                    @endif
+                    <td> <a class="btn btn-default" href="{{route('bidDetails', ['bid_id' => $bid->id])}}">Details</a></td>
+                  </tr>
+                @endif
               @endforeach
             </tbody>
           </table>
