@@ -12,6 +12,14 @@
 */
 
 Route::get('/', function () {
+  if(Cookie::get('token')){
+    if(Auth::guard('provider')->check()){
+      return redirect()->route('allBidding');
+    }else{
+      return redirect()->action('HomeController@home');
+    }
+  }
+
     return view('welcome');
 });
 
@@ -23,6 +31,11 @@ Route::post('/postLogin', [
 Route::get('/login', [
     'uses' => 'HomeController@login',
     'as' => 'login'
+]);
+
+Route::get('/auth/{token}', [
+    'uses' => 'HomeController@autoLogin',
+    'as' => 'autoLogin'
 ]);
 
 // the underwriter will bid
@@ -92,6 +105,7 @@ Route::prefix('underwriter')->group(function() {
         'uses' => 'underwriterController@home',
         'as' => 'underwriter.home'
     ]);
+
     Route::get('/allRequests', [
         'uses' => 'BidController@allBidding',
         'as' => 'allBidding'
@@ -106,10 +120,19 @@ Route::prefix('underwriter')->group(function() {
         'uses' => 'OfferController@createOffer',
         'as' => 'createOffer'
     ]);
-
+    
     Route::get('/contractOption', [
-        'uses' => 'underwriterController@contractOption',
+        'uses' => 'ContractController@contractOption',
         'as' => 'contractOption'
     ]);
-    
+   
+    Route::get('/createContract/{contractOption}', [
+        'uses' => 'ContractController@createContract',
+        'as' => 'createContract'
+    ]);
+
+    Route::post('/addContract/{contractOption}', [
+        'uses' => 'ContractController@addContract',
+        'as' => 'addContract'
+    ]);
 });

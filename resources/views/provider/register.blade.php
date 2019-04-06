@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('provider.postRegister') }}">
+                    <form method="POST" action="{{ route('underwriter.postRegister') }}">
                         @csrf
 
                         <div class="form-group row">
