@@ -47,7 +47,7 @@
 
                 @endif
                 </li>
-                @if(empty(session()->get('user_id')))
+                @if(empty(session()->get('user_id')) && !Auth::guard('provider')->check())
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                     </li>
@@ -61,25 +61,39 @@
                       <!-- Authentication Links -->
 
                           <li class="nav-item dropdown">
-                              <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                  {{\App\User::find(Session::get('user_id'))->firstname}}
-                              </a>
+                            @if (Auth::guard('provider')->check())
 
-                              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                  <a class="dropdown-item" href="{{ route('logout') }}"
-                                     onclick="event.preventDefault();
-                                                   document.getElementById('logout-form').submit();">
-                                      {{ __('Logout') }}
-                                  </a>
-                                @if(Auth::guard('provider')->check())
-                                  <form id="logout-form" action="{{ route('underwriter.logout') }}" method="POST" style="display: none;">
-                                      @csrf
-                                  </form>
-                                  @else
-                                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                          @csrf
-                                      </form>
-                                  @endif
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{Auth::guard('provider')->user()->name}}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+                                    <form id="logout-form" action="{{ route('underwriter.logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                  </div>
+                            @else
+
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{\App\User::find(Session::get('user_id'))->firstname}}
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                    </form>
+                                  </div>
+                            @endif
+
                               </div>
                           </li>
                   </ul>
