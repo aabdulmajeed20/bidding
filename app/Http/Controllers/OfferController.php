@@ -14,12 +14,14 @@ class OfferController extends Controller
 
     public function addOffer(Request $request, $bid_id)
     {
+        //dd($request);
         $provider_id = Auth::guard('provider')->id();
         $provider = Provider::where('_id', $provider_id)->first();
-
         $bid = Bid::where('_id', $bid_id)->first();
         $offer = new Offer();
-        $offer->price = $request->price;
+        $offer->price = $request->offerPrice;
+        $offer->premuim = $request->PremuimPrice;
+        $offer->currency = $provider->currency;
         $offer->save();
         $provider->offer()->save($offer);
         $bid->offer()->save($offer);
