@@ -17,6 +17,8 @@ class CreateProvidersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('picture');
+            $table->string('currency');
+            $table->string('cover');
             $table->timestamps();
         });
     }

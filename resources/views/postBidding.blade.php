@@ -23,6 +23,17 @@
         <div class="row">
           <div class="col-md-4"></div>
           <div class="form-group col-md-4">
+            <label for="cover">Coverage:</label>
+            <select class="form-control" id="cover" name="cover" required>
+              <option disabled selected>-- SELECT --</option>
+              <option value="g">Physical Grain</option>
+              <option value="c">Marked By Market (Cash Equivalent)</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="form-group col-md-4">
             <button type="submit" class="btn btn-success">Submit</button>
           </div>
         </div>

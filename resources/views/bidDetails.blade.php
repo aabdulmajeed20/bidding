@@ -12,7 +12,8 @@
     <div class="col-sm-12">
       <div class="panel panel-default text-left">
         <div class="panel-body">
-          <p contenteditable="false">Request Amount: {{$bid->amount}} CBX</p>
+          <p contenteditable="false"><strong>Request Amount: {{$bid->amount}} CBX</strong></p>
+          <p contenteditable="false"><strong>Coverage Type: {{$bid->cover == 'g'? 'Physical Grain' : 'Marked By Market'}}</strong></p>
         </div>
       </div>
     </div>

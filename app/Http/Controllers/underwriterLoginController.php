@@ -20,9 +20,12 @@ class underwriterLoginController extends Controller
     }
     public function postRregister()
     {
+        //dd(request()->all());
         $provider = new Provider();
         $provider->name = request('name');
         $provider->email = request('email');
+        $provider->cover = request('cover');
+        $provider->currency = request('currency');
         $provider->password = bcrypt(request('password'));
         $provider->save();
 

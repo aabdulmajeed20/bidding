@@ -15,6 +15,8 @@ class AddPriceToOffers extends Migration
     {
         Schema::table('offers', function (Blueprint $table) {
             $table->string('price');
+            $table->string('premuim');
+            $table->string('currency');
         });
     }
 
