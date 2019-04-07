@@ -46,8 +46,8 @@ class OfferController extends Controller
                     'Authorization' => 'Bearer '.$accessToken,
                 ],
                 'form_params' => [
-                    'amount' => $offer->price,
-                    'underwriter' => $offer->provider_id
+                    'amount' => $issueRequest->amount,
+                    'underwriter' => $offer->provider_id,
                 ]
             ]);
 
