@@ -100,10 +100,17 @@
               </ul>
             </div>
         </nav>
-
+        @if(empty(session()->get('user_id')) && !Auth::guard('provider')->check())
+          @if(Route::currentRouteName() != 'login' && Route::currentRouteName() != 'register')
+            <script type="text/javascript">
+              window.location.href = "{{route('login')}}";
+            </script>
+          @endif
+        @endif
         <main class="py-4">
             @yield('content')
         </main>
     </div>
+
 </body>
 </html>

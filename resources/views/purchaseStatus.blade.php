@@ -20,11 +20,15 @@
               <h2>Contract Token:</h2>
           </div>
           <div class="col-md-2"></div>
-          <div class="form-group col-md-8">
+          <div class="form-group col-md-7">
             <input type="text" class="form-control" value="{{$purchase['token']}}" readonly>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-1">
             <a class="btn btn-primary" href="#"><i class="fas fa-clipboard"></i> Copy</a>
+          </div>
+
+          <div class="col-md-1">
+            <a class="btn btn-primary" href="http://{{env('CBX_API')}}/Issuance/Claim/{{base64_encode($purchase['token'])}}"><i class="fas fa-wallet"></i> Claim</a>
           </div>
         </div>
       </form>
