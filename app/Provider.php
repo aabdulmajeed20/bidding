@@ -34,4 +34,9 @@ class Provider extends Authenticatable
     {
         return $this->hasMany('App\Offer');
     }
+
+    public function contract()
+    {
+        return $this->hasMany('App\Contract');
+    }
 }

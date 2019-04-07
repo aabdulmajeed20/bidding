@@ -44,7 +44,7 @@ class underwriterLoginController extends Controller
             // dd($provider_id);
             Session::put("provider_id", $provider_id);
 
-            return redirect()->route('allBidding');
+            return redirect()->route('underwriter.home');
         }
         return 'Failed Login';
     }
@@ -52,6 +52,6 @@ class underwriterLoginController extends Controller
     public function getLogout()
     {
         Auth::guard('provider')->logout();
-        return redirect('/underwriter/login');
+        return redirect()->route('underwriter.login');
     }
 }

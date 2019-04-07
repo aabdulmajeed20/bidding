@@ -69,7 +69,13 @@
                 <div class="top-right links">
                     @auth
                         <a href="{{ route('underwriter.home') }}">Home</a>
-                        <a href="{{ route('underwriter.logout') }}">Logout</a>
+                        <a href="{{ route('underwriter.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
+                        
+                        <form id="logout-form" action="{{ route('underwriter.logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
@@ -86,13 +92,9 @@
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="{{route('contractOption')}}">Create Contract</a>
+                    <a href="{{route('allBidding')}}">Show Bidding</a>
+
                 </div>
             </div>
         </div>

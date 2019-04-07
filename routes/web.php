@@ -81,14 +81,17 @@ Route::prefix('underwriter')->group(function() {
         'uses' => 'underwriterLoginController@register',
         'as' => 'register'
     ]);
+    
     Route::post('/postRegister', [
         'uses' => 'underwriterLoginController@postRregister',
         'as' => 'underwriter.postRegister'
     ]);
+
     Route::get('/login', [
         'uses' => 'underwriterLoginController@login',
         'as' => 'underwriter.login'
     ]);
+
     Route::post('/postLogin', [
         'uses' => 'underwriterLoginController@postLogin',
         'as' => 'underwriter.postLogin'
@@ -97,10 +100,12 @@ Route::prefix('underwriter')->group(function() {
         'uses' => 'underwriterLoginController@getLogout',
         'as' => 'underwriter.logout'
     ]);
-    Route::get('home', [
+
+    Route::get('/home', [
         'uses' => 'underwriterController@home',
         'as' => 'underwriter.home'
     ]);
+
     Route::get('/allRequests', [
         'uses' => 'BidController@allBidding',
         'as' => 'allBidding'
@@ -114,5 +119,20 @@ Route::prefix('underwriter')->group(function() {
     Route::get('/requestDetails/{bid_id}/createOffer', [
         'uses' => 'OfferController@createOffer',
         'as' => 'createOffer'
+    ]);
+    
+    Route::get('/contractOption', [
+        'uses' => 'ContractController@contractOption',
+        'as' => 'contractOption'
+    ]);
+   
+    Route::get('/createContract/{contractOption}', [
+        'uses' => 'ContractController@createContract',
+        'as' => 'createContract'
+    ]);
+
+    Route::post('/addContract/{contractOption}', [
+        'uses' => 'ContractController@addContract',
+        'as' => 'addContract'
     ]);
 });
