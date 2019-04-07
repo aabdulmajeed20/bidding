@@ -30,7 +30,7 @@
             <a href="{{route('buyOffer', ['id' => $offer->id])}}" class="btn btn-primary btn-sm float-right"> Buy </a>
             @endif
             <div class="price-wrap h5">
-              <span class="price-new">{{$offer->price}}</span>
+              <span class="price-new">{{$offer->price + $offer->premuim}} {{$offer->currency}}</span>
             </div> <!-- price-wrap.// -->
           </div> <!-- action-wrap -->
         </figcaption>
