@@ -28,7 +28,8 @@ class underwriterLoginController extends Controller
         $provider->currency = request('currency');
         $provider->password = bcrypt(request('password'));
         $provider->save();
-
+        Auth::guard('provider')->attempt(['email' => request('email'), 'password' => request('password')]);
+        Session::put("provider_id", $provider->id);
         return redirect()->route('allBidding');
     }
     public function login()
