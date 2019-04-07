@@ -69,7 +69,13 @@
                 <div class="top-right links">
                     @auth
                         <a href="{{ route('underwriter.home') }}">Home</a>
-                        <a href="{{ route('underwriter.logout') }}">Logout</a>
+                        <a href="{{ route('underwriter.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
+                        
+                        <form id="logout-form" action="{{ route('underwriter.logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
