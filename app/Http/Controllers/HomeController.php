@@ -7,7 +7,7 @@ use GuzzleHttp\Client;
 use Session;
 use Cookie;
 use App\User;
-// use Auth;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -85,18 +85,28 @@ class HomeController extends Controller
     public function postLogin()
     {
         $client = new Client();
-        // dd(request('email'), request('password'));
-        try {
+
             $res = $client->post('http://'.env('CBX_API').'/api/login', [
                 'form_params' => [
                     'email' => request('email'),
                     'password' => request('password')
 
-                ]
+                ],
+                'exceptions' => false,
             ]);
-        } catch (\Throwable $th) {
-            return $th;
-        }
+
+            if($res->getStatusCode() == 401){
+              if(Auth::guard('provider')->attempt(['email' => request('email'), 'password' => request('password')])) {
+
+                  $provider_id = Auth::guard('provider')->id();
+
+                  Session::put("provider_id", $provider_id);
+
+                  return redirect()->route('allBidding');
+              }
+              return redirect()->route('login')->with('failed','User Not Found');
+            }
+
         $token = json_decode($res->getBody())->success->token;
         $firstname = json_decode($res->getBody())->success->firstname;
         $lastname = json_decode($res->getBody())->success->lastname;
