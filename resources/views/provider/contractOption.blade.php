@@ -18,10 +18,10 @@
                 <div class="card-body">
                     <div class="row text-center">
                         <div class="col-md-6">
-                            <a href="{{route('createContract', ['contract_type' => "Physical Grain"])}}"class="link">Physical Grain</a>
+                            <a href="{{route('createContract')}}"class="link">Physical Grain</a>
                         </div>
                         <div class="col-md-6">
-                            <a href="{{route('createContract', ['contract_type' => "Cash Equivalent"])}}" class="link">Cash Equivalent</a>
+                            <a href="{{route('createContract')}}" class="link">Cash Equivalent</a>
                         </div>
                     </div>
                 </div>

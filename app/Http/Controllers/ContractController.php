@@ -15,20 +15,21 @@ class ContractController extends Controller
         return view('provider/contractOption');
     }
 
-    public function addContract(Request $request, $contract_type)
+    public function addContract(Request $request)
     {
         $provider = Provider::find(Auth::guard('provider')->id())->first();
         $contract = new Contract();
 
         $contract->amount = $request->amount; 
-        $contract->coverage =  $contract_type;
+        $contract->remaining_balance = $request->amount;
+        $provider->contract_number = mt_rand(1000000000, 9999999999);
         $provider->contract()->save($contract);
-        
+
         return redirect()->route('underwriter.home');
     }
 
-    public function createContract($contract_type)
+    public function createContract()
     {
-        return view('provider/createContract',  ['contract_type' => $contract_type]);
+        return view('provider/createContract');
     }
 }

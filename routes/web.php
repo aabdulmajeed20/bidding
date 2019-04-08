@@ -126,12 +126,12 @@ Route::prefix('underwriter')->group(function() {
         'as' => 'contractOption'
     ]);
    
-    Route::get('/createContract/{contractOption}', [
+    Route::get('/createContract', [
         'uses' => 'ContractController@createContract',
         'as' => 'createContract'
     ]);
 
-    Route::post('/addContract/{contractOption}', [
+    Route::post('/addContract', [
         'uses' => 'ContractController@addContract',
         'as' => 'addContract'
     ]);
