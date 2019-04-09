@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DropColumnsFromContracts extends Migration
+class AddColumnsToContracts extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,8 @@ class DropColumnsFromContracts extends Migration
     public function up()
     {
         Schema::table('contracts', function (Blueprint $table) {
-            $table->dropColumn('organization_name');  
+            $table->double('remaining_balance');
+            $table->integer('contract_number')->unique();
         });
     }
 
@@ -26,7 +27,7 @@ class DropColumnsFromContracts extends Migration
     public function down()
     {
         Schema::table('contracts', function (Blueprint $table) {
-            $table->string('organization_name');
+            //
         });
     }
 }

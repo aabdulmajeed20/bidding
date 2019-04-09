@@ -9,20 +9,25 @@ use App\Provider;
 
 class ContractController extends Controller
 {
-
-    public function contractOption()
-    {
-        return view('provider/contractOption');
-    }
-
+    
     public function addContract(Request $request)
     {
         $provider = Provider::find(Auth::guard('provider')->id())->first();
         $contract = new Contract();
 
-        $contract->amount = $request->amount; 
-        $contract->remaining_balance = $request->amount;
-        $provider->contract_number = mt_rand(1000000000, 9999999999);
+        $provider_contract = Contract::where('provider_id', $provider->id)->where('remaining_balance', '>' , 0)->first();
+
+        if ($provider_contract) {
+            $contract->amount = $provider_contract->remaining_balance; 
+            $provider_contract->remaining_balance = 0;
+            $provider_contract->save();
+        }
+
+        $contract->amount += $request->amount; 
+        $contract->remaining_balance = $contract->amount;
+
+        // must check if the number exist or not 
+        $contract->contract_number = mt_rand(1000000000, mt_getrandmax());
         $provider->contract()->save($contract);
 
         return redirect()->route('underwriter.home');

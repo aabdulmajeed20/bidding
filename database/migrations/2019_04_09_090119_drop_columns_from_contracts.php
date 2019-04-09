@@ -14,9 +14,9 @@ class DropColumnsFromContracts extends Migration
     public function up()
     {
         Schema::table('contracts', function (Blueprint $table) {
-            //            
+            //
+            $table->dropColumn('organization_name');  
             $table->dropColumn('coverage');  
-
         });
     }
 
@@ -28,7 +28,7 @@ class DropColumnsFromContracts extends Migration
     public function down()
     {
         Schema::table('contracts', function (Blueprint $table) {
-            //
+            $table->string('organization_name');
             $table->string('coverage');
         });
     }

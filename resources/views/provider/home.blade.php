@@ -92,7 +92,7 @@
                 </div>
 
                 <div class="links">
-                    <a href="{{route('contractOption')}}">Create Contract</a>
+                    <a href="{{route('createContract')}}">Create Contract</a>
                     <a href="{{route('allBidding')}}">Show Bidding</a>
 
                 </div>

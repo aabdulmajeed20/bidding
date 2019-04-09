@@ -12,12 +12,12 @@
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Amount</th> {{-- how many bids are there?  --}}
-                <th>Offers Count</th> {{-- how many bids are there?  --}}
-                <th>Offerable?</th>  {{-- how much did u take the bid?!    --}}
-                <th>Post Time</th>  {{-- EX: 1 year ago   --}}
-                <th>Status</th>  {{-- EX: completed or incomleted   --}}
-                <th>Details</th>  {{-- EX: 1 year ago   --}}
+                <th>Amount</th>
+                <th>Offers Count</th> 
+                <th>Offerable?</th>  
+                <th>Post Time</th>
+                <th>Status</th>  
+                <th>Details</th>  
               </tr>
             </thead>
             <tbody>
@@ -27,7 +27,7 @@
                     <td>{{$bid->id}}</td>
                     <td>{{$bid->amount}} CBX</td>
                     <td>{{$bid->offer()->count()}}</td>
-                    @if ($bid->offer()->where('provider_id',Auth::guard('provider')->id())->count() > 0)
+                    @if ($bid->offer()->where('provider_id',Auth::guard('provider')->id())->count() > 0 || $remaining_balance  <= $bid->amount)
                       <td><span class="text-danger">False</span></td>
                     @else
                       <td><span class="text-success">True</span></td>
