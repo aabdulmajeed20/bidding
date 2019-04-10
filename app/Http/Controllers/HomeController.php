@@ -49,6 +49,7 @@ class HomeController extends Controller
 
         return view('home');
     }
+    
     public function autoLogin($token)
     {
         $client = new Client();
@@ -82,6 +83,7 @@ class HomeController extends Controller
 
         return redirect()->route('home');
     }
+
     public function postLogin()
     {
         $client = new Client();

@@ -15,7 +15,6 @@ class OfferController extends Controller
 
     public function addOffer(Request $request, $bid_id)
     {
-        //dd($request);
         $provider_id = Auth::guard('provider')->id();
         $provider = Provider::where('_id', $provider_id)->first();
         $contract = Contract::where('provider_id', $provider->id)->where('remaining_balance', '>' , 0)->first();

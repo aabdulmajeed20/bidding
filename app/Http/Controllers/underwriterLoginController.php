@@ -9,15 +9,16 @@ use Session;
 
 class underwriterLoginController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('guest:provider', ['except' => ['getLogout']]);
     }
+
     public function register()
     {
         return view('provider/register');
     }
+
     public function postRregister()
     {
         //dd(request()->all());
@@ -32,10 +33,12 @@ class underwriterLoginController extends Controller
         Session::put("provider_id", $provider->id);
         return redirect()->route('allBidding');
     }
+
     public function login()
     {
         return view('provider/login');
     }
+
     public function postLogin()
     {
         if(Auth::guard('provider')->attempt(['email' => request('email'), 'password' => request('password')])) {

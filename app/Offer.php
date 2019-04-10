@@ -15,8 +15,6 @@ class Offer extends Eloquent
         'is_purchased', 'price',
     ];
 
-
-
     public function provider()
     {
         return $this->belongsTo('App\Provider');
