@@ -7,6 +7,7 @@ use App\Offer;
 use App\Provider;
 use App\Bid;
 use Auth;
+use App\Contract;
 use GuzzleHttp\Client;
 use Cookie;
 class OfferController extends Controller
@@ -17,11 +18,20 @@ class OfferController extends Controller
         //dd($request);
         $provider_id = Auth::guard('provider')->id();
         $provider = Provider::where('_id', $provider_id)->first();
+        $contract = Contract::where('provider_id', $provider->id)->where('remaining_balance', '>' , 0)->first();
         $bid = Bid::where('_id', $bid_id)->first();
         $offer = new Offer();
         $offer->price = $request->offerPrice;
         $offer->premuim = $request->PremuimPrice;
         $offer->currency = $provider->currency;
+
+        if ( $contract->remaining_balance < floatval($request->PremuimPrice)) {
+            return  redirect()->route('createOffer',['bid_id' => $bid_id])->with('failed', 'The amount should equal or less than your amount!');
+        }
+
+        $contract->remaining_balance -= floatval($request->PremuimPrice);
+
+        $contract->save();
         $offer->save();
         $provider->offer()->save($offer);
         $bid->offer()->save($offer);

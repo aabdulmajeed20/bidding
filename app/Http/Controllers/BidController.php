@@ -7,6 +7,7 @@ use Auth;
 use App\Bid;
 use App\User;
 use App\Offer;
+use App\Contract;
 use Session;
 
 class BidController extends Controller
@@ -21,9 +22,18 @@ class BidController extends Controller
 
 
       if(Auth::guard('provider')->check()){
-
+       
         $offers = Offer::where('bid_id', $bid_id)->where('provider_id',Auth::guard('provider')->id())->get()->count();
-        if($offers > 0) $offerable = False;
+
+        if($provider_contract = Contract::where('provider_id', Auth::guard('provider')->id())->where('remaining_balance', '>' , 0)->first()){
+          // dd(Contract::where('provider_id', Auth::guard('provider')->id())->where('remaining_balance', '>' , 0)->first()->remaining_balance);
+          if($offers > 0 || $provider_contract->remaining_balance < $bid->amount) {
+            $offerable = False;
+          }
+        } 
+        else{
+          $offerable = False;
+        }
 
         $offers = Offer::where('bid_id', $bid_id)->where('provider_id',Auth::guard('provider')->id())->get();
 
@@ -69,10 +79,15 @@ class BidController extends Controller
     {
       if(Auth::guard('provider')->check()){
         $data = Bid::where('status', 'open')->get();
-        return view('provider/allBidding', ['data' => $data]);
+        $contract = Contract::where('provider_id', Auth::guard('provider')->id())->where('remaining_balance', '>' , 0)->first();
+        $remaining_balance = 0;
+        if ($contract) {
+          $remaining_balance = $contract->remaining_balance; 
+        }
+
+        return view('provider/allBidding', ['data' => $data, 'remaining_balance' => $remaining_balance ]);
       }else{
         return abort(401);
       }
-
     }
 }

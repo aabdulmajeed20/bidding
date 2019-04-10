@@ -12,7 +12,7 @@ class Contract extends Eloquent
     protected $collection = 'contracts';
 
     protected $fillable = [
-        'amount','coverage',
+        'amount', 'remaining_balance', 'contract_number'
     ];
 
     public function provider()
