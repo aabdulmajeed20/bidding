@@ -18,6 +18,8 @@ class CreateProvidersTable extends Migration
             $table->string('name');
             $table->string('picture');
             $table->string('currency');
+            $table->string('portfolio_size')->nullable();
+            $table->string('escrow_account')->nullable();
             $table->string('cover');
             $table->timestamps();
         });
