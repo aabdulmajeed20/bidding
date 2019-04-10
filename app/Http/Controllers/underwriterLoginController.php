@@ -21,11 +21,13 @@ class underwriterLoginController extends Controller
 
     public function postRregister()
     {
-        //dd(request()->all());
+      //  dd(request()->all());
         $provider = new Provider();
         $provider->name = request('name');
         $provider->email = request('email');
         $provider->cover = request('cover');
+        $provider->escrow_account = request('escrow') != 'none' ? request('escrow') : null;
+        $provider->portfolio_size= request('portfolio') != 'none' ? request('portfolio') : null;
         $provider->currency = request('currency');
         $provider->password = bcrypt(request('password'));
         $provider->save();

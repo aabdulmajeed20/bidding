@@ -41,7 +41,7 @@
                             </div>
                         </div>
                         @php
-                        $path = base_path() . "/resources/json/currencies.json"; // ie: /var/www/laravel/app/storage/json/filename.json
+                        $path = base_path() . "/resources/json/currencies.json";
 
                         $json = json_decode(file_get_contents($path), true);
 
@@ -74,7 +74,7 @@
                             <div class="col-md-6">
                               <select class="form-control" name="cover" id="cover" required>
                                 <option selected disabled>-- Please Select --</option>
-                                <option value="c">Marked By Market</option>
+                                <option value="c">Cash Equivalent</option>
                                 <option value="g">Physical Grain</option>
                               </select>
                             </div>

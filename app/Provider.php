@@ -18,7 +18,7 @@ class Provider extends Authenticatable
     protected $guard = 'provider';
 
     protected $fillable = [
-        'name', 'email', 'coverage'
+        'name', 'email', 'coverage', 'escrow_account', 'portfolio_size'
     ];
 
     /**
