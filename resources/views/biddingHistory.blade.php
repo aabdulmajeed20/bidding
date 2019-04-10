@@ -20,10 +20,10 @@
               <tr>
                 <th>Request ID</th>
                 <th>Amount</th>
-                <th>Number of Offers	</th> {{-- how many bids are there?  --}}
-                <th>Timestamp</th>  {{-- EX: 1 year ago   --}}
-                <th>Status</th>  {{-- EX: 1 year ago   --}}
-                <th colspan="2">Tools</th>  {{-- EX: completed or incomleted   --}}
+                <th>Number of Offers	</th> 
+                <th>Timestamp</th>  
+                <th>Status</th>  
+                <th colspan="2">Tools</th>  
 
               </tr>
             </thead>
@@ -43,15 +43,15 @@
                   <td colspan="2">
                     <div class="row">
                       <div class="col-md-4">
-                        <a class="btn btn-default" href="#"><i class="fas fa-flag"></i></a>
+                        <a class="btn btn-default" href="#" data-toggle="tooltip" data-placement="right" title="write Description"><i class="fas fa-flag"></i></a>
                       </div>
                       @if ($bid->status == "open")
                         <div class="col-md-4">
-                          <a class="btn btn-default" href="#"><i class="fas fa-trash"></i></a>
+                          <a class="btn btn-default" href="#" data-toggle="tooltip" data-placement="right" title="write Description"><i class="fas fa-trash"></i></a>
                         </div>
                       @endif
                       <div class="col-md-4">
-                        <a class="btn btn-default" href="{{route('bidDetails', ['bid_id' => $bid->id])}}"><i class="fas fa-book-open"></i></a>
+                        <a class="btn btn-default" href="{{route('bidDetails', ['bid_id' => $bid->id])}}" data-toggle="tooltip" data-placement="right" title="write Description"><i class="fas fa-book-open"></i></a>
                       </div>
                     </div>
                   </td>
@@ -84,13 +84,13 @@
                       <td colspan="2">
                         <div class="row">
                           <div class="col-md-4">
-                            <a class="btn btn-default" href="#"><i class="fas fa-flag"></i></a>
+                            <a class="btn btn-default" href="#" data-toggle="tooltip" data-placement="right" title="write Description"><i class="fas fa-flag"></i></a>
                           </div>
                           <div class="col-md-4">
-                            <a class="btn btn-default" href="#"><i class="fas fa-trash"></i></a>
+                            <a class="btn btn-default" href="#" data-toggle="tooltip" data-placement="right" title="write Description"><i class="fas fa-trash"></i></a>
                           </div>
                           <div class="col-md-4">
-                            <a class="btn btn-default" href="{{route('bidDetails', ['bid_id' => $bid->id])}}"><i class="fas fa-book-open"></i></a>
+                            <a class="btn btn-default" href="{{route('bidDetails', ['bid_id' => $bid->id])}}" data-toggle="tooltip" data-placement="right" title="write Description"><i class="fas fa-book-open"></i></a>
                           </div>
                         </div>
                       </td>
@@ -107,9 +107,9 @@
             <thead>
               <tr>
                 <th>Request ID</th>
-                <th>Number of Offers</th> {{-- how many bids are there?  --}}
-                <th>Purchase Price</th>  {{-- how much did u take the bid?!    --}}
-                <th>Timestamp</th>  {{-- EX: 1 year ago   --}}
+                <th>Number of Offers</th>
+                <th>Purchase Price</th> 
+                <th>Timestamp</th> 
                 <th colspan="2">Tools</th>
               </tr>
             </thead>
@@ -118,16 +118,16 @@
                 @if ($bid->status == "closed")
                   <tr>
                     <td>{{$bid->id}}</td>
-                    <td>{{$bid->offer()->count()}}	offer(s)</td> {{-- {{($bid->provider_ids)->count()}} --}}
-                    <td>{{$bid->offer()->max('price')}}</td> {{-- {{$bid->max(amount)}} --}}
+                    <td>{{$bid->offer()->count()}}	offer(s)</td> 
+                    <td>{{$bid->offer()->max('price')}}</td>
                     <td>{{$bid->created_at}}</td>
                     <td colspan="2">
                       <div class="row">
                         <div class="col-md-6">
-                          <a class="btn btn-default" href="#"><i class="fas fa-flag"></i></a>
+                          <a class="btn btn-default" href="#" data-toggle="tooltip" data-placement="right" title="write Description"><i class="fas fa-flag"></i></a>
                         </div>
                         <div class="col-md-6">
-                          <a class="btn btn-default" href="{{route('bidDetails', ['bid_id' => $bid->id])}}"><i class="fas fa-book-open"></i></a>
+                          <a class="btn btn-default" href="{{route('bidDetails', ['bid_id' => $bid->id])}}" data-toggle="tooltip" data-placement="right" title="write Description"><i class="fas fa-book-open"></i></a>
                         </div>
                       </div>
                     </td>
