@@ -30,20 +30,21 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel bg-dark">
-          <a class="navbar-brand" href="{{ url('/') }}">Cash 4 Grain</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-              <span class="navbar-toggler-icon"></span>
-          </button>
+            @if(Auth::guard('provider')->check())
+            <a class="navbar-brand" href="{{ url('underwriter/home') }}">Cash 4 Grain</a>
+            @else
+              <a class="navbar-brand" href="{{ url('/') }}">Cash 4 Grain</a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+            @endif
           <div class="collapse navbar-collapse" id="navbarText">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                 @if(Auth::guard('provider')->check())
                   <a class="nav-link" href="{{ route('underwriter.home') }}">Home</a>
-
                 @else
-
                   <a class="nav-link" href="{{ route('home') }}">Home</a>
-
                 @endif
                 </li>
                 @if(empty(session()->get('user_id')) && !Auth::guard('provider')->check())
@@ -103,7 +104,7 @@
         @if(empty(session()->get('user_id')) && !Auth::guard('provider')->check())
           @if(Route::currentRouteName() != 'login' && Route::currentRouteName() != 'register')
             <script type="text/javascript">
-              window.location.href = "{{route('login')}}";
+              // window.location.href = "{{route('login')}}"; // This is causing a redirect error when login as underwriter
             </script>
           @endif
         @endif

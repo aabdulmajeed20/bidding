@@ -27,7 +27,7 @@
                     <td>{{$bid->id}}</td>
                     <td>{{$bid->amount}} CBX</td>
                     <td>{{$bid->offer()->count()}}</td>
-                    @if ($bid->offer()->where('provider_id',Auth::guard('provider')->id())->count() > 0 || $remaining_balance  <= $bid->amount)
+                    @if ($bid->offer()->where('provider_id',Auth::guard('provider')->id())->count() > 0 || $remaining_balance  < $bid->amount)
                       <td><span class="text-danger">False</span></td>
                     @else
                       <td><span class="text-success">True</span></td>

@@ -23,10 +23,17 @@ class BidController extends Controller
 
       if(Auth::guard('provider')->check()){
        
-        $provider_contract = Contract::where('provider_id', Auth::guard('provider')->id())->where('remaining_balance', '>' , 0)->first();
         $offers = Offer::where('bid_id', $bid_id)->where('provider_id',Auth::guard('provider')->id())->get()->count();
-        
-        if($offers > 0 || $provider_contract->remaining_balance <= $bid->amount) $offerable = False;
+
+        if($provider_contract = Contract::where('provider_id', Auth::guard('provider')->id())->where('remaining_balance', '>' , 0)->first()){
+          // dd(Contract::where('provider_id', Auth::guard('provider')->id())->where('remaining_balance', '>' , 0)->first()->remaining_balance);
+          if($offers > 0 || $provider_contract->remaining_balance < $bid->amount) {
+            $offerable = False;
+          }
+        } 
+        else{
+          $offerable = False;
+        }
 
         $offers = Offer::where('bid_id', $bid_id)->where('provider_id',Auth::guard('provider')->id())->get();
 

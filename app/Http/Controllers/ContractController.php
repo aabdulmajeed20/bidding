@@ -12,7 +12,9 @@ class ContractController extends Controller
     
     public function addContract(Request $request)
     {
-        $provider = Provider::find(Auth::guard('provider')->id())->first();
+        
+        $provider_id = Auth::guard('provider')->id();
+        $provider = Provider::where('_id', $provider_id)->first();
         $contract = new Contract();
 
         $provider_contract = Contract::where('provider_id', $provider->id)->where('remaining_balance', '>' , 0)->first();
