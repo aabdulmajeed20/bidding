@@ -16,9 +16,14 @@ class Currency {
       }
       return $price[$from.'_'.$to];
     }
+    static function covertPrice($from, $to, $amount){
+      $req = @file_get_contents('https://free.currencyconverterapi.com/api/v6/convert?q='.$from.'_'.$to.'&compact=ultra&apiKey='. env("currencyconverterapi"));
+      $price = json_decode($req, true);
+
+       return number_format(floatval($amount * $price[$from.'_'.$to]), 3);
+    }
 
     static function getPrice($to, $amount){
-
      $cbxPrice = 2.00;
      $convertedPrice = Currency::convert('USD', $to, $amount);
      $finalMarketPrice = $convertedPrice * $cbxPrice;

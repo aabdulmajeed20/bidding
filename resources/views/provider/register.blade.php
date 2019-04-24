@@ -40,6 +40,14 @@
                                 <input id="city" type="text" class="form-control" name="city" value="{{ GeoIP(Request::ip())->city }}" required>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="iban" class="col-md-4 col-form-label text-md-right">{{ __('IBAN') }} <font color="red">*</font></label>
+
+                            <div class="col-md-6">
+                                <input id="iban" type="text" class="form-control" name="iban" placeholder="International Bank Account Number" required>
+                            </div>
+                        </div>
+
                         @php
                         $path = base_path() . "/resources/json/currencies.json";
 
@@ -69,7 +77,7 @@
                               </div>
                           </div>
                         <div class="form-group row">
-                            <label for="cover" class="col-md-4 col-form-label text-md-right">Coverage <font color="red">*</font></label>
+                            <label for="cover" class="col-md-4 col-form-label text-md-right">Cover Type <font color="red">*</font></label>
 
                             <div class="col-md-6">
                               <select class="form-control" name="cover" id="cover" required>
@@ -84,10 +92,7 @@
                             <label for="portfolio" class="col-md-4 col-form-label text-md-right">{{ __('Portfolio Size') }} <font color="red">*</font></label>
 
                             <div class="col-md-6">
-                                <input id="portfolio" type="text" class="form-control" name="portfolio" value="none" required>
-                            </div>
-                            <div class="col-md-2">
-                              <strong>Acres</strong>
+                                <input id="portfolio" type="text" placeholder="Baskets Amount" class="form-control" name="portfolio" value="none" required>
                             </div>
                         </div>
 

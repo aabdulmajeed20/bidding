@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    
+
   <div class="container">
     <br/>
     @if (\Session::has('failed'))
@@ -14,7 +14,7 @@
         <div class="row">
           <div class="col-md-4"></div>
           <div class="form-group col-md-4">
-            <label for="amount">CBX amount:</label>
+            <label for="amount">Amount of Baskets:</label>
             <input type="number" step="0.001" class="form-control" name="amount" required>
           </div>
         </div>
@@ -24,7 +24,7 @@
               <input type="checkbox" name="checkbox" value="check" id="agree" required /> I have read and agree to the Terms and Conditions and Privacy Policy
             <button type="submit" class="btn btn-success">Submit</button>
           </div>
-        </div>       
+        </div>
       </form>
     </div>
 

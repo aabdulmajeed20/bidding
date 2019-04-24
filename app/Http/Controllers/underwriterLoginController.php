@@ -26,14 +26,21 @@ class underwriterLoginController extends Controller
         $provider->name = request('name');
         $provider->email = request('email');
         $provider->cover = request('cover');
+        $provider->country = request('country');
+        $provider->city = request('city');
+        $provider->iban = request('iban');
         $provider->escrow_account = request('escrow') != 'none' ? request('escrow') : null;
-        $provider->portfolio_size= request('portfolio') != 'none' ? request('portfolio') : null;
+        $provider->portfolio_size = request('portfolio') != 'none' ? request('portfolio') : null;
         $provider->currency = request('currency');
         $provider->password = bcrypt(request('password'));
         $provider->save();
         Auth::guard('provider')->attempt(['email' => request('email'), 'password' => request('password')]);
         Session::put("provider_id", $provider->id);
-        return redirect()->route('allBidding');
+        if($provider->portfolio_size != null){
+          return redirect()->action('ContractController@addContract', ['physical'=>$provider->portfolio_size]);
+        }
+        return redirect()->action('ContractController@addContract', ['cashEquivalent'=>true]);
+
     }
 
     public function login()

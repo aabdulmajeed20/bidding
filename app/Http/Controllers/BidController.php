@@ -8,6 +8,7 @@ use App\Bid;
 use App\User;
 use App\Offer;
 use App\Contract;
+use App\MainFunc;
 use Session;
 
 class BidController extends Controller
@@ -18,27 +19,26 @@ class BidController extends Controller
       $offerable = True;
       $bid = Bid::where('_id', $bid_id)->first();
       //check if Request exist, if not .. 404
-      if(empty($bid)) return abort(404);
+      if(empty($bid)) return abort(404 , 'The Request Does Not Exist');
 
 
       if(Auth::guard('provider')->check()){
-       
-        $offers = Offer::where('bid_id', $bid_id)->where('provider_id',Auth::guard('provider')->id())->get()->count();
 
-        if($provider_contract = Contract::where('provider_id', Auth::guard('provider')->id())->where('remaining_balance', '>' , 0)->first()){
-          // dd(Contract::where('provider_id', Auth::guard('provider')->id())->where('remaining_balance', '>' , 0)->first()->remaining_balance);
-          if($offers > 0 || $provider_contract->remaining_balance < $bid->amount) {
+        $offers = Offer::where('bid_id', $bid_id)->where('provider_id',Auth::guard('provider')->id())->get()->count();
+        $provider_contract = Contract::where('provider_id', Auth::guard('provider')->id())->first();
+        $remaining_balance = MainFunc::getBalance();
+
+        if($remaining_balance !== false && $remaining_balance < $bid->amount){
+
             $offerable = False;
-          }
-        } 
-        else{
-          $offerable = False;
-        }
+        }elseif($offers > 0) {
+            $offerable = False;
+                  }
 
         $offers = Offer::where('bid_id', $bid_id)->where('provider_id',Auth::guard('provider')->id())->get();
 
       }else{
-        $offers = Offer::where('bid_id', $bid_id)->get();
+        $offers = Offer::where('bid_id', $bid_id)->orderBy('premium','ASC')->get();
         //check if Request Belong to User..
         $user_id = Session::get('user_id');
         //if Not .. 403 -> unAutherized
@@ -57,8 +57,10 @@ class BidController extends Controller
         $bid->amount = $request->amount;
         $bid->cover = $request->cover;
         $bid->status = "open";
-
-        $bid =  $user->bid()->save($bid);
+        if($request->market != 'none') $bid->market = $user->country;
+        $bid = $user->bid()->save($bid);
+        $bid->request_number = hash('sha256', $bid->id.$user_id.rand(999,9999999999).date('his'));
+        $bid->save();
 
         return redirect()->route('biddingHistory');
     }
@@ -78,12 +80,9 @@ class BidController extends Controller
     public function allBidding()
     {
       if(Auth::guard('provider')->check()){
-        $data = Bid::where('status', 'open')->get();
-        $contract = Contract::where('provider_id', Auth::guard('provider')->id())->where('remaining_balance', '>' , 0)->first();
-        $remaining_balance = 0;
-        if ($contract) {
-          $remaining_balance = $contract->remaining_balance; 
-        }
+        $data = Bid::where('cover', Auth::guard('provider')->user()->cover)->orderBy('created_at','DESC')->get();
+        $contract = Contract::where('provider_id', Auth::guard('provider')->id())->first();
+        $remaining_balance = MainFunc::getBalance();
 
         return view('provider/allBidding', ['data' => $data, 'remaining_balance' => $remaining_balance ]);
       }else{

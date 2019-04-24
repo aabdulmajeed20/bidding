@@ -28,6 +28,10 @@ Route::post('/postLogin', [
     'as' => 'postLogin'
 ]);
 
+Route::get('/profile/{id}', function($id){
+  dd(\App\Provider::where('_id', $id)->first());
+})->name('profile');
+
 Route::get('/login', [
     'uses' => 'HomeController@login',
     'as' => 'login'
@@ -81,7 +85,7 @@ Route::prefix('underwriter')->group(function() {
         'uses' => 'underwriterLoginController@register',
         'as' => 'register'
     ]);
-    
+
     Route::post('/postRegister', [
         'uses' => 'underwriterLoginController@postRregister',
         'as' => 'underwriter.postRegister'
@@ -120,18 +124,18 @@ Route::prefix('underwriter')->group(function() {
         'uses' => 'OfferController@createOffer',
         'as' => 'createOffer'
     ]);
-    
+
     Route::get('/contractOption', [
         'uses' => 'ContractController@contractOption',
         'as' => 'contractOption'
     ]);
-   
+
     Route::get('/createContract', [
         'uses' => 'ContractController@createContract',
         'as' => 'createContract'
     ]);
 
-    Route::post('/addContract', [
+    Route::match(array('GET','POST'), '/addContract', [
         'uses' => 'ContractController@addContract',
         'as' => 'addContract'
     ]);

@@ -16,6 +16,7 @@ class AddToBids extends Migration
         Schema::table('bids', function (Blueprint $table) {
             $table->string('provider_id')->nullable()->change();
             $table->string('purchased_date');
+            $table->string('offer_id');
             $table->string('status');
         });
     }

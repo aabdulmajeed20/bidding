@@ -18,6 +18,7 @@ class CreateBidsTable extends Migration
             $table->string('amount');
             $table->string('status');
             $table->string('cover');
+            $table->string('market')->nullable();
             $table->string('provider_id');
             $table->timestamps();
         });

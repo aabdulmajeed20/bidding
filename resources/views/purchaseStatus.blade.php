@@ -35,8 +35,12 @@
 
       <div class="card">
           <div class="card-body">
-            <h5> Amount: {{$purchase['request']->amount}} CBX</h5>
-            <h5> Price: {{$purchase['offer']->price}} SAR</h5>
+            <h5> Amount: {{$purchase['request']->amount}} Baskets</h5>
+
+            <h5> Price: {{number_format(floatval(str_replace(',', "", $purchase['offer']->price)), 2)}} {{$purchase['offer']->currency}}</h5>
+            <h5> premium: {{number_format(floatval(str_replace(',', "", $purchase['offer']->premium)), 2)}} {{$purchase['offer']->currency}}</h5>
+            <h5> Price: {{number_format(floatval(str_replace(',', "", $purchase['offer']->price)) + floatval(str_replace(',', "", $purchase['offer']->premium)), 2)}} {{$purchase['offer']->currency}}</h5>
+            <h5> Purchased From: {{\App\Provider::where('_id', $purchase['offer']->provider_id)->first()->name}}</h5>
           </div>
       </div>
     @endif

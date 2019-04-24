@@ -14,7 +14,7 @@ class AddColumnsToContracts extends Migration
     public function up()
     {
         Schema::table('contracts', function (Blueprint $table) {
-            $table->double('remaining_balance');
+            $table->double('remaining_balance')->nullable();
             $table->integer('contract_number')->unique();
         });
     }

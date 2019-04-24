@@ -12,10 +12,10 @@ class Bid extends Eloquent
     protected $collection = 'bids';
 
     protected $fillable = [
-        'amount', 'status','purchased_date', 'status'
+        'amount', 'status','purchased_date', 'market'
     ];
 
-    public function user() 
+    public function user()
     {
         return $this->belongsTo('App\User');
     }

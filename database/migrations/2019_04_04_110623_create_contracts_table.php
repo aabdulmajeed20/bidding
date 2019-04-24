@@ -17,7 +17,7 @@ class CreateContractsTable extends Migration
             $table->increments('id');
             $table->string('organization_name');
             $table->string('coverage');
-            $table->double('amount');
+            $table->double('amount')->nullable();
             $table->timestamps();
         });
     }

@@ -62,12 +62,28 @@
 
                           <li class="nav-item dropdown">
                             @if (Auth::guard('provider')->check())
+                                @inject('balance', 'App\MainFunc')
+
 
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{Auth::guard('provider')->user()->name}}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                  @if ($balance->getBalance())
+                                    <div class="dropdown-item">
+                                      Balance:
+                                      @if ($balance->getBalance() <= 0)
+                                        No Balance
+                                      @else
+                                        @if ($balance->getBalance() == 1)
+                                          {{number_format($balance->getBalance())}} Basket
+                                        @else
+                                          {{number_format($balance->getBalance())}} Baskets
+                                        @endif
+                                      @endif
+                                    </div>
+                                  @endif
                                     <a class="dropdown-item" href="#"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -80,7 +96,7 @@
                             @else
 
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{\App\User::find(Session::get('user_id'))->firstname}}
+                                    {{\App\User::where('_id', Session::get('user_id'))->first()->firstname}}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -98,6 +114,13 @@
                           </li>
                   </ul>
                 @endif
+                <li class="nav-item">
+                  @if (Auth::guard('provider')->check())
+                    <h4 class="text-white">Underwriter Terminal</h4>
+                  @elseif (!empty(session()->get('user_id')) && !Auth::guard('provider')->check())
+                    <h4 class="text-white">Issuer Terminal</h4>
+                  @endif
+                </li>
               </ul>
             </div>
         </nav>

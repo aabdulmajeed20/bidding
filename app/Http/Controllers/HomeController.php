@@ -49,7 +49,7 @@ class HomeController extends Controller
 
         return view('home');
     }
-    
+
     public function autoLogin($token)
     {
         $client = new Client();
@@ -62,17 +62,22 @@ class HomeController extends Controller
                 'Authorization' => 'Bearer '.$accessToken,
                 ]
             ]);
-
         $token = $accessToken;
+        $prefix = json_decode($res->getBody())->success->prefix;
         $firstname = json_decode($res->getBody())->success->firstname;
+        $middlename = json_decode($res->getBody())->success->middlename;
         $lastname = json_decode($res->getBody())->success->lastname;
+        $country = json_decode($res->getBody())->success->country;
         $email = json_decode($res->getBody())->success->email;
         $user = User::where('email', $email)->first();
 
             if(!$user){
                 $user = new User();
+                $user->prefix = $prefix;
                 $user->firstname = $firstname;
+                $user->middlename = $middlename;
                 $user->lastname = $lastname;
+                $user->country = $country;
                 $user->email = $email;
                 $user->remember_token = $token;
                 $user->save();
